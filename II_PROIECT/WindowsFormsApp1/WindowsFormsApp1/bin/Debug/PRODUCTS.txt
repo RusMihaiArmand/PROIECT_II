@@ -1,0 +1,7 @@
+1,100,car,car1.jpg,10,4.5,its a red car
+2,320,Green car,car2.jpg,13,5,GREEN car
+6,250,yet another car,car3.jpg,5,2.7,blu :/
+3,9999,HAPPINESS,happy.png,0,5,you CAN buy it
+4,45,Cute teddy bear,bear.jpg,20,4.3,Infinite hugs (plus/minus 5)
+5,250,Sharp sword,sword.jpg,100,3.9,Cuts bread
+7,2,Toaster,toaster.jpg,12,2.2,Just a toaster

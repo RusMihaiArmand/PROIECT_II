@@ -1,0 +1,6 @@
+admin,admin,True,True,100
+account,123,False,False,200
+PREMaccount,1234,False,True,629
+NOTadmin,parola,False,True,48
+Mihai,misu,False,True,69
+Mihai2,mihai,False,False,0
