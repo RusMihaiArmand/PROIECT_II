@@ -28,3 +28,4 @@ D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormTesting.resources

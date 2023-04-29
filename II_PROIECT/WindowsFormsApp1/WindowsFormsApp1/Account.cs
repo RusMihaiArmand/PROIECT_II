@@ -6,33 +6,35 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class Account
+     class Account
     {
         private string name;
         private string pass;
+        private string email;
+        private double money;
         private bool isAdmin;
-        private bool hasPremium;
-        private int money;
 
-        public Account(string n, string p, bool adm, bool prem, int mone)
+        
+        public Account(string n, string p, string em, double mone, bool a)
         {
             this.name = n;
             this.pass = p;
-            this.isAdmin = adm;
-            this.hasPremium = (prem || adm);
+            this.email = em;
+            
             this.money = mone;
-
+            this.isAdmin = a;
         }
+        
 
-        public int getMoney()
+        public double getMoney()
         {
             return this.money;
         }
-        public void setMoney(int n)
+        public void setMoney(double n)
         {
             this.money = n;
         }
-        public void addMoney(int n)
+        public void addMoney(double n)
         {
             this.money = this.money + n;
         }
@@ -57,15 +59,14 @@ namespace WindowsFormsApp1
             this.pass = n;
         }
 
-        public bool getPremium()
+        public string getEmail()
         {
-            return this.hasPremium;
+            return this.email;
         }
-        public void setPremium(bool p)
+        public void setEmail(string n)
         {
-            this.hasPremium = p;
+            this.email = n;
         }
-
 
         public bool getAdmin()
         {
@@ -76,6 +77,19 @@ namespace WindowsFormsApp1
             this.isAdmin = p;
         }
 
+        /*
+        public bool getPremium()
+        {
+            return this.hasPremium;
+        }
+        public void setPremium(bool p)
+        {
+            this.hasPremium = p;
+        }
+
+
+        
+        
 
         override
         public string ToString()
@@ -84,6 +98,8 @@ namespace WindowsFormsApp1
                 this.hasPremium.ToString() + "," + this.money.ToString();
 
         }
+        */
+
 
 
     }

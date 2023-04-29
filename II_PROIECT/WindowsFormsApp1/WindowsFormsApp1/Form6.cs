@@ -91,7 +91,7 @@ namespace WindowsFormsApp1
             if(i!=-1)
             {
                 Program.getProducts().RemoveAt(i);
-                Program.WriteProducts();
+                //Program.WriteProducts();
                 Program.f1.ShowProducts();
 
             }
@@ -161,7 +161,7 @@ namespace WindowsFormsApp1
                     Program.getProducts().ElementAt(i).setPhotoName(photo);
 
 
-                    Program.WriteProducts();
+                    //Program.WriteProducts();
                     Program.f1.ShowProducts();
 
                 }
@@ -169,7 +169,7 @@ namespace WindowsFormsApp1
                 {
                     Product pr = new Product(id, price, name, photo, quant, score, desc);
                     Program.getProducts().Add(pr);
-                    Program.WriteProducts();
+                    //Program.WriteProducts();
                     Program.f1.ShowProducts();
 
                 }

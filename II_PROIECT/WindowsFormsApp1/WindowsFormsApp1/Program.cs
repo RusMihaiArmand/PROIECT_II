@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
             f1.SetUsername();
         }
 
-
+        /*
         private static void LoadProducts()
         {
             products.Clear();
@@ -177,6 +177,8 @@ namespace WindowsFormsApp1
 
         }
 
+        */
+
         public static void NewAccount(Account a)
         {
             accounts.Add(a);
@@ -185,19 +187,18 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
+            /*
             LoadProducts();
             WriteProducts();
 
             LoadAccounts();
             WriteAccounts();
-
+            */
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(f3=new Form3());
-
-            
-
+           
 
         }
     }

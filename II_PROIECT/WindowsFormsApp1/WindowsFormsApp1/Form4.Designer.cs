@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxUser = new System.Windows.Forms.TextBox();
+            this.textBoxPass = new System.Windows.Forms.TextBox();
+            this.buttonCreateAccount = new System.Windows.Forms.Button();
+            this.textBoxError = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,45 +40,48 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxMail = new System.Windows.Forms.TextBox();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxUser
             // 
-            this.textBox1.Location = new System.Drawing.Point(246, 155);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(176, 22);
-            this.textBox1.TabIndex = 2;
+            this.textBoxUser.Location = new System.Drawing.Point(246, 198);
+            this.textBoxUser.Name = "textBoxUser";
+            this.textBoxUser.Size = new System.Drawing.Size(176, 22);
+            this.textBoxUser.TabIndex = 2;
             // 
-            // textBox2
+            // textBoxPass
             // 
-            this.textBox2.Location = new System.Drawing.Point(246, 237);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(176, 22);
-            this.textBox2.TabIndex = 3;
+            this.textBoxPass.Location = new System.Drawing.Point(246, 242);
+            this.textBoxPass.Name = "textBoxPass";
+            this.textBoxPass.PasswordChar = '*';
+            this.textBoxPass.Size = new System.Drawing.Size(176, 22);
+            this.textBoxPass.TabIndex = 3;
             // 
-            // button1
+            // buttonCreateAccount
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(203, 363);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(227, 73);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "CREATE ACCOUNT";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonCreateAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.buttonCreateAccount.ForeColor = System.Drawing.Color.White;
+            this.buttonCreateAccount.Location = new System.Drawing.Point(203, 363);
+            this.buttonCreateAccount.Name = "buttonCreateAccount";
+            this.buttonCreateAccount.Size = new System.Drawing.Size(227, 73);
+            this.buttonCreateAccount.TabIndex = 4;
+            this.buttonCreateAccount.Text = "CREATE ACCOUNT";
+            this.buttonCreateAccount.UseVisualStyleBackColor = false;
+            this.buttonCreateAccount.Click += new System.EventHandler(this.buttonCreateAccount_Click);
             // 
-            // textBox3
+            // textBoxError
             // 
-            this.textBox3.Location = new System.Drawing.Point(246, 285);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(176, 22);
-            this.textBox3.TabIndex = 5;
+            this.textBoxError.Location = new System.Drawing.Point(246, 285);
+            this.textBoxError.Name = "textBoxError";
+            this.textBoxError.ReadOnly = true;
+            this.textBoxError.Size = new System.Drawing.Size(176, 22);
+            this.textBoxError.TabIndex = 5;
             // 
             // button2
             // 
@@ -119,7 +122,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.logo_no_background___Copy_2;
+            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(25, 32);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(314, 145);
@@ -130,14 +133,17 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.buttonBack);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.textBoxMail);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.textBoxError);
+            this.panel2.Controls.Add(this.textBoxUser);
+            this.panel2.Controls.Add(this.buttonCreateAccount);
+            this.panel2.Controls.Add(this.textBoxPass);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(376, 0);
             this.panel2.Name = "panel2";
@@ -161,7 +167,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.label3.Location = new System.Drawing.Point(146, 237);
+            this.label3.Location = new System.Drawing.Point(150, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 19);
             this.label3.TabIndex = 11;
@@ -172,15 +178,45 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.label4.Location = new System.Drawing.Point(146, 155);
+            this.label4.Location = new System.Drawing.Point(146, 198);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(78, 19);
             this.label4.TabIndex = 10;
             this.label4.Text = "Username";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.label5.Location = new System.Drawing.Point(175, 157);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 19);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Email";
+            // 
+            // textBoxMail
+            // 
+            this.textBoxMail.Location = new System.Drawing.Point(246, 157);
+            this.textBoxMail.Name = "textBoxMail";
+            this.textBoxMail.Size = new System.Drawing.Size(176, 22);
+            this.textBoxMail.TabIndex = 13;
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.White;
+            this.buttonBack.ForeColor = System.Drawing.Color.Black;
+            this.buttonBack.Location = new System.Drawing.Point(17, 12);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(42, 34);
+            this.buttonBack.TabIndex = 15;
+            this.buttonBack.Text = "<---";
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
             // Form4
             // 
-            this.AcceptButton = this.button1;
+            this.AcceptButton = this.buttonCreateAccount;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 538);
@@ -201,10 +237,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxUser;
+        private System.Windows.Forms.TextBox textBoxPass;
+        private System.Windows.Forms.Button buttonCreateAccount;
+        private System.Windows.Forms.TextBox textBoxError;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -213,5 +249,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxMail;
+        private System.Windows.Forms.Button buttonBack;
     }
 }

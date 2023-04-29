@@ -72,11 +72,11 @@ namespace WindowsFormsApp1
                             Program.getProducts().ElementAt(index).getQuantity() - 1);
 
                         Program.getCurrentAccount().addMoney(-Program.getProducts().ElementAt(index).getPrice());
-                        Program.WriteAccounts();
+                        //Program.WriteAccounts();
 
                         Program.f1.SetUsername();
 
-                        Program.WriteProducts();
+                       // Program.WriteProducts();
 
                     }
                     else

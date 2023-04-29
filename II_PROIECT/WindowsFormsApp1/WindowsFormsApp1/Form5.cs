@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
+            /*
             if (Program.getCurrentAccount() == null || Program.getCurrentAccount().getAdmin() == false)
                 button5.Hide();
             else
@@ -26,6 +27,7 @@ namespace WindowsFormsApp1
                 button4.Hide();
             else
                 button4.Show();
+                */
 
         }
 
@@ -59,7 +61,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show("Money added", "Message");
                     Program.getCurrentAccount().addMoney(s);
 
-                    Program.WriteAccounts();
+                    //Program.WriteAccounts();
                     Program.f1.SetUsername();
 
                 }
@@ -71,12 +73,13 @@ namespace WindowsFormsApp1
         {
             if (Program.getCurrentAccount() != null)
             {
+                /*
                 if (Program.getCurrentAccount().getMoney() >= 50
                       && Program.getCurrentAccount().getPremium() == false)
                 {
                     Program.getCurrentAccount().addMoney(-50);
-                    Program.getCurrentAccount().setPremium(true);
-                    Program.WriteAccounts();
+                    //Program.getCurrentAccount().setPremium(true);
+                    //Program.WriteAccounts();
                     Program.f1.SetUsername();
 
                     button4.Hide();
@@ -85,6 +88,7 @@ namespace WindowsFormsApp1
                 }
                 else
                     MessageBox.Show("Can't buy premium", "Message");
+                    */
             }
         }
 

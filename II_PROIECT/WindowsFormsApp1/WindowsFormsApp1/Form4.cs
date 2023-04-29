@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,62 +18,75 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
-            List<Account> accountsList = Program.getAccounts();
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            con.Open();
+            SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name", con);
+            com1.Parameters.AddWithValue("name", textBoxUser.Text);
 
-            string name = textBox1.Text;
-            string pass = textBox2.Text;
+            SqlDataReader reader1 = com1.ExecuteReader();
 
+            
 
-            if (name.Length < 4 || name.Length > 10 ||
-                pass.Length < 4 || pass.Length > 10)
+            if (!reader1.Read())
             {
-                if(name.Length<4)
-                    textBox3.Text = "username too short";
+                con.Close();
+                string user = textBoxUser.Text;
+                string pass = textBoxPass.Text;
+
+                textBoxError.Text = "";
+
+                if (pass.Length > 10)
+                    textBoxError.Text = "Password too long";
                 else
                 {
-                    if (name.Length >10)
-                        textBox3.Text = "username too long";
+                    if (user.Length > 20)
+                        textBoxError.Text = "Username too long";
                     else
                     {
-                        if (pass.Length < 4)
-                            textBox3.Text = "password too short";
+                        if (pass.Length < 3)
+                            textBoxError.Text = "Password too short";
                         else
                         {
-                            textBox3.Text = "password too long";
+                            if (user.Length < 3)
+                                textBoxError.Text = "Username too short";
+                            else
+                            {
+                                //to add mail errors
+                                con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+                                con.Open();
+                                SqlCommand com2 = new SqlCommand("insert into utilizator values(@nameUt,@pass," +
+                                    "@email,0,0,null)", con);
+                                com2.Parameters.AddWithValue("nameUt", textBoxUser.Text);
+                                com2.Parameters.AddWithValue("pass", textBoxPass.Text);
+                                com2.Parameters.AddWithValue("email", textBoxMail.Text);
+
+                                
+                                
+                                reader1 = com2.ExecuteReader();
+                                con.Close();
+
+                                ClearText();
+                                Program.f4.Hide();
+                                Program.f3.Show();
+
+                            }
+
                         }
+
                     }
+
                 }
+
             }
             else
-            { 
-                bool ok = true;
-
-                foreach(Account a in accountsList)
-                {
-                    if (a.getName().Equals(name))
-                        ok = false;
-
-                }
-
-                Account acc = new Account(name, pass, false, false, 0);
-
-                if (ok)
-                {
-                    Program.NewAccount(acc);
-                    Program.WriteAccounts();
-                    textBox3.Text = "";
-
-
-                    Program.f3.Show();
-                    Program.f4.Hide();
-
-                }
-                else
-                    textBox3.Text = "username in use";
-
+            {
+                con.Close();
+                textBoxError.Text = "Username in use";
             }
+
+            
 
         }
 
@@ -82,9 +96,25 @@ namespace WindowsFormsApp1
             Close();
         }
 
+        private void ClearText()
+        {
+            textBoxError.Text = "";
+            textBoxUser.Text = "";
+            textBoxPass.Text = "";
+            textBoxMail.Text = "";
+
+        }
+
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            ClearText();
+            Program.f3.Show();
+            Program.f4.Hide();
         }
     }
 }

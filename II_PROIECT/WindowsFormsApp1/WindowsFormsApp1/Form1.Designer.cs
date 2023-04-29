@@ -53,6 +53,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.AddPicture = new System.Windows.Forms.PictureBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddPicture)).BeginInit();
@@ -311,13 +313,29 @@
             // 
             // AddPicture
             // 
-            this.AddPicture.Image = global::WindowsFormsApp1.Properties.Resources.add;
             this.AddPicture.Location = new System.Drawing.Point(17, 357);
             this.AddPicture.Name = "AddPicture";
             this.AddPicture.Size = new System.Drawing.Size(229, 82);
             this.AddPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.AddPicture.TabIndex = 20;
             this.AddPicture.TabStop = false;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(293, 9);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 22);
+            this.textBox6.TabIndex = 21;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(186, 10);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 22;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -326,6 +344,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1144, 507);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.AddPicture);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox5);
@@ -384,6 +404,8 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox AddPicture;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button button5;
     }
 }
 

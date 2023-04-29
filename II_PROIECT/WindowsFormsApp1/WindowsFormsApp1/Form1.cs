@@ -231,10 +231,12 @@ namespace WindowsFormsApp1
                 textBox4.Text = Program.getCurrentAccount().getName();
                 textBox5.Text = Program.getCurrentAccount().getMoney().ToString();
 
+                /*
                 if(Program.getCurrentAccount().getPremium()==true)
                     AddPicture.Hide();
                 else
                     AddPicture.Show(); ;
+                    */
 
             }
             
@@ -278,6 +280,20 @@ namespace WindowsFormsApp1
         private void button4_Click_1(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            if (Program.getCurrentAccount().getAdmin())
+                textBox6.Text = "admin acc";
+            else
+                textBox6.Text = "NOT admin acc";
         }
     }
 }
