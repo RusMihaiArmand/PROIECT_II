@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form3
+    partial class FormLogIn
     {
         /// <summary>
         /// Required designer variable.
@@ -87,6 +87,7 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(176, 22);
             this.textBoxUser.TabIndex = 4;
+            this.textBoxUser.Text = "admin";
             // 
             // textBoxPass
             // 
@@ -95,6 +96,7 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(176, 22);
             this.textBoxPass.TabIndex = 5;
+            this.textBoxPass.Text = "1234";
             // 
             // textBoxErrorPassword
             // 
@@ -167,7 +169,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(376, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(592, 538);
+            this.panel2.Size = new System.Drawing.Size(610, 538);
             this.panel2.TabIndex = 9;
             // 
             // label2
@@ -192,17 +194,17 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "WELCOME";
             // 
-            // Form3
+            // FormLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(968, 538);
+            this.ClientSize = new System.Drawing.Size(986, 538);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Form3";
-            this.Text = "Form3";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "FormLogIn";
+            this.Text = "Log In";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

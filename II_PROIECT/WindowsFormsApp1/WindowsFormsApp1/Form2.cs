@@ -13,24 +13,25 @@ namespace WindowsFormsApp1
     public partial class Form2 : Form
     {
         int index;
-        public Form2(int indx)
+        public Form2()
         {
+            int indx = 0;
             InitializeComponent();
             this.index = indx;
 
-            pictureBox1.Load( "pictures\\" +  Program.getProducts().ElementAt(indx).getPhotoName());
+            //pictureBox1.Load( "pictures\\" +  Program.getProducts().ElementAt(indx).getPhotoName());
 
-            textBox1.Text = (Program.getProducts().ElementAt(indx).getName());
-            textBox2.Text = (Program.getProducts().ElementAt(indx).getDescription());
+            //textBox1.Text = (Program.getProducts().ElementAt(indx).getName());
+            //textBox2.Text = (Program.getProducts().ElementAt(indx).getDescription());
 
-            textBox3.Text = "rating " + (Program.getProducts().ElementAt(indx).getScore()) + " stars";
+            //textBox3.Text = "rating " + (Program.getProducts().ElementAt(indx).getScore()) + " stars";
 
-            if ((Program.getProducts().ElementAt(indx).getQuantity()) == 0)
-                textBox4.Text = "UNAVAILABLE";
-            else
-                textBox4.Text = "IN STOCK";
+            //if ((Program.getProducts().ElementAt(indx).getQuantity()) == 0)
+            //    textBox4.Text = "UNAVAILABLE";
+            //else
+            //    textBox4.Text = "IN STOCK";
 
-            textBox5.Text = (Program.getProducts().ElementAt(indx).getPrice()) + " $";
+            //textBox5.Text = (Program.getProducts().ElementAt(indx).getPrice()) + " $";
 
 
             
@@ -58,34 +59,36 @@ namespace WindowsFormsApp1
             else
             {
 
-                if ((Program.getProducts().ElementAt(index).getQuantity()) == 0)
-                {
-                    MessageBox.Show("Product not in stock right now :(", "Message");
-                }
-                else
-                {
-                    if (Program.getCurrentAccount().getMoney() >=
-                        Program.getProducts().ElementAt(index).getPrice())
-                    {
-                        MessageBox.Show("Bought :)", "Message");
-                        Program.getProducts().ElementAt(index).setQuantity(
-                            Program.getProducts().ElementAt(index).getQuantity() - 1);
+                //if ((Program.getProducts().ElementAt(index).getQuantity()) == 0)
+                //{
+                //    MessageBox.Show("Product not in stock right now :(", "Message");
+                //}
+                //else
+                //{
+                //    if (Program.getCurrentAccount().getMoney() >=
+                //        Program.getProducts().ElementAt(index).getPrice())
+                //    {
+                //        MessageBox.Show("Bought :)", "Message");
+                //        Program.getProducts().ElementAt(index).setQuantity(
+                //            Program.getProducts().ElementAt(index).getQuantity() - 1);
 
-                        Program.getCurrentAccount().addMoney(-Program.getProducts().ElementAt(index).getPrice());
-                        //Program.WriteAccounts();
+                //        Program.getCurrentAccount().addMoney(-Program.getProducts().ElementAt(index).getPrice());
+                //        //Program.WriteAccounts();
 
-                        Program.f1.SetUsername();
+                //        Program.f1.SetUsername();
 
-                       // Program.WriteProducts();
+                //       // Program.WriteProducts();
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("You're too poor to afford this :/", "Message");
-                    }
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("You're too poor to afford this :/", "Message");
+                //    }
 
 
-                }
+                //}
+
+
             }
         }
     }

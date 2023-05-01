@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,15 +8,18 @@ using System.Threading.Tasks;
 namespace WindowsFormsApp1
 {
      class Account
-    {
+     {
         private string name;
         private string pass;
         private string email;
         private double money;
         private bool isAdmin;
+        private bool hasPremium;
+        private DateTime premiumUntil;
+            
 
         
-        public Account(string n, string p, string em, double mone, bool a)
+        public Account(string n, string p, string em, double mone, bool a, bool pr, DateTime premTime)
         {
             this.name = n;
             this.pass = p;
@@ -23,6 +27,11 @@ namespace WindowsFormsApp1
             
             this.money = mone;
             this.isAdmin = a;
+
+            this.hasPremium = pr;
+            this.premiumUntil = premTime;
+
+            
         }
         
 
@@ -37,6 +46,16 @@ namespace WindowsFormsApp1
         public void addMoney(double n)
         {
             this.money = this.money + n;
+
+            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            con.Open();
+            SqlCommand com1 = new SqlCommand("update utilizator set wallet=@mon where username=@name", con);
+
+            com1.Parameters.AddWithValue("mon", this.money);
+            com1.Parameters.AddWithValue("name", this.name);
+
+            SqlDataReader reader1 = com1.ExecuteReader();
+            con.Close();
         }
 
 
@@ -77,7 +96,7 @@ namespace WindowsFormsApp1
             this.isAdmin = p;
         }
 
-        /*
+        
         public bool getPremium()
         {
             return this.hasPremium;
@@ -87,10 +106,17 @@ namespace WindowsFormsApp1
             this.hasPremium = p;
         }
 
+        public DateTime getPremiumTime()
+        {
+            return this.premiumUntil;
+        }
+        public void setPremiumTime(DateTime p)
+        {
+            this.premiumUntil = p;
+        }
 
-        
-        
 
+        /*
         override
         public string ToString()
         {

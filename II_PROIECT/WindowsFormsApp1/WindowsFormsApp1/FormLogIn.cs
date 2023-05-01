@@ -11,28 +11,42 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form3 : Form
+    public partial class FormLogIn : Form
     {
-        public Form3()
+        public FormLogIn()
         {
             InitializeComponent();
-            Program.f1 = new Form1();
-            Program.f4 = new Form4();
+            Program.setForm1(new Form1() ) ;
+            Program.setForm2(new Form2());
+            Program.setSignUpForm( new FormSignUp() );
+            Program.setControlForm(new FormControls());
+            Program.setForm6(new Form6());
 
-            Program.f1.Hide();
-            Program.f4.Hide();
+            Program.getForm1().Hide();
+            Program.getForm2().Hide();
+            Program.getSignUpForm().Hide();
+            Program.getControlForm().Hide();
+            Program.getForm6().Hide();
 
         }
 
         private void buttonSignUp_Click(object sender, EventArgs e)
         {
-            Program.f4.Show();
-            Program.f3.Hide();
+            ClearTextBoxes();
+            Program.getSignUpForm().Show();
+            Program.getLogInForm().Hide();
+        }
+
+        private void ClearTextBoxes()
+        {
+            textBoxUser.Text = "";
+            textBoxPass.Text = "";
+            textBoxErrorPassword.Text = "";
         }
 
         private void buttonLogIn_Click(object sender, EventArgs e)
         {
-            List<Account> accountsList = Program.getAccounts();
+           // List<Account> accountsList = Program.getAccounts();
 
             //string name = textBox1.Text;
             string pass = textBoxPass.Text;
@@ -53,19 +67,27 @@ namespace WindowsFormsApp1
                     Double.TryParse(reader1["wallet"].ToString(), out money);
 
                     bool adminStatus = false;
-
                     if (reader1["email"].ToString().Contains("@admin"))
                         adminStatus = true;
 
+                    bool premiumStatus = false;
+
+                    if( DateTime.Now < DateTime.Parse(reader1["premiumUntil"].ToString()) || adminStatus)
+                        premiumStatus = true;
+
+                    DateTime time = DateTime.Parse(reader1["premiumUntil"].ToString());
+
+
+
                     Account ac = new Account(reader1["username"].ToString(), reader1["passwrd"].ToString(),
-                        reader1["email"].ToString(), money, adminStatus);
+                        reader1["email"].ToString(), money, adminStatus, premiumStatus, time);
 
                     Program.SetCurrentAccount(ac);
 
-                    textBoxErrorPassword.Text = "";
+                    ClearTextBoxes();
 
-                    Program.f1.Show();
-                    Program.f3.Hide();
+                    Program.getForm1().Show();
+                    Program.getLogInForm().Hide();
 
                 }
                 else

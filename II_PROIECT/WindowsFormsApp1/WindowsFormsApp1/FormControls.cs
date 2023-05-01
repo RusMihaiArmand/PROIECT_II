@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form5 : Form
+    public partial class FormControls : Form
     {
-        public Form5()
+        public FormControls()
         {
             InitializeComponent();
 
@@ -31,71 +32,86 @@ namespace WindowsFormsApp1
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSignOut_Click(object sender, EventArgs e)
         {
             Program.SetCurrentAccount(null);
-            Close();
+            Program.getControlForm().Hide();
+
+            Program.getLogInForm().Show();
+
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonExit_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonAddFunds_Click(object sender, EventArgs e)
         {
             if (Program.getCurrentAccount() == null)
                 MessageBox.Show("You have to log in first", "Message");
             else
             {
                 int s;
-                Int32.TryParse(textBox1.Text, out s);
+                Int32.TryParse(textBoxFunds.Text, out s);
 
                 if (s < 0)
                     s = 0;
 
-                textBox1.Text = s.ToString();
+                textBoxFunds.Text = s.ToString();
 
                 if(s>0)
                 {
                     MessageBox.Show("Money added", "Message");
                     Program.getCurrentAccount().addMoney(s);
 
-                    //Program.WriteAccounts();
-                    Program.f1.SetUsername();
 
                 }
 
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonPremium_Click(object sender, EventArgs e)
         {
             if (Program.getCurrentAccount() != null)
             {
-                /*
+
                 if (Program.getCurrentAccount().getMoney() >= 50
                       && Program.getCurrentAccount().getPremium() == false)
                 {
                     Program.getCurrentAccount().addMoney(-50);
-                    //Program.getCurrentAccount().setPremium(true);
-                    //Program.WriteAccounts();
-                    Program.f1.SetUsername();
+                    Program.getCurrentAccount().setPremium(true);
 
-                    button4.Hide();
+                    Program.getForm1().SetUsername();
+
+                    buttonPremium.Hide();
+
+
+                    SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+                    con.Open();
+                    SqlCommand com1 = new SqlCommand("update utilizator set premiumUntil=@date where username=@name", con);
+
+                    string prDate =   DateTime.Now.AddDays(30).ToString()  ;
+
+                    com1.Parameters.AddWithValue("date", prDate);
+                    com1.Parameters.AddWithValue("name", Program.getCurrentAccount().getName());
+
+                    SqlDataReader reader1 = com1.ExecuteReader();
+                    con.Close();
 
 
                 }
                 else
                     MessageBox.Show("Can't buy premium", "Message");
-                    */
+                
+
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonEventAdder_Click(object sender, EventArgs e)
         {
-            Form6 f6 = new Form6();
-            f6.Show();
+            Program.getControlForm().Hide();
+            Program.getForm6().Show();
         }
 
         private void Form5_Load(object sender, EventArgs e)

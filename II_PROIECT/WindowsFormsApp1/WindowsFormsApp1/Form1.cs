@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-            button3.Hide();
+            buttonSettings.Hide();
 
             while (panel1.Controls.Count > 0)
                 foreach (Control c in panel1.Controls)
@@ -36,23 +36,23 @@ namespace WindowsFormsApp1
 
             Random rand = new Random();
 
-            foreach (Product p in Program.getProducts())
-            {
+            //foreach (Product p in Program.getProducts())
+            //{
 
-                getNextPos(out int x, out int y);
-                PictureBox pb = new PictureBox();
-                pb.Load( "pictures\\" +   p.getPhotoName());
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                pb.Size = new Size(200, 100);
-                    panel1.Controls.Add(pb);
-                pb.Location = new Point(x, y);
-                pb.Name = p.getName();
+            //    getNextPos(out int x, out int y);
+            //    PictureBox pb = new PictureBox();
+            //    pb.Load( "pictures\\" +   p.getPhotoName());
+            //    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+            //    pb.Size = new Size(200, 100);
+            //        panel1.Controls.Add(pb);
+            //    pb.Location = new Point(x, y);
+            //    pb.Name = p.getName();
 
-                pb.MouseClick += new MouseEventHandler(PageOpener);
+            //    pb.MouseClick += new MouseEventHandler(PageOpener);
 
-                productsIndex.Add(Program.getProducts().IndexOf(p));
+            //    //productsIndex.Add(Program.getProducts().IndexOf(p));
 
-            }
+            //}
 
 
 
@@ -111,20 +111,6 @@ namespace WindowsFormsApp1
                 textBox2.Text = max_price.ToString();
 
 
-            double rating = 0;
-
-            if (radioButton1.Checked)
-                rating = 5;
-            if (radioButton2.Checked)
-                rating = 4;
-            if (radioButton3.Checked)
-                rating = 3;
-            if (radioButton4.Checked)
-                rating = 2;
-            if (radioButton5.Checked)
-                rating = 1;
-
-
 
             while (panel1.Controls.Count > 0)
                 foreach (Control c in panel1.Controls)
@@ -139,35 +125,35 @@ namespace WindowsFormsApp1
 
             Random rand = new Random();
 
-            foreach (Product p in Program.getProducts())
-            {
-                if (!p.getName().ToLower().Contains(name))
-                    continue;
+            //foreach (Product p in Program.getProducts())
+            //{
+            //    if (!p.getName().ToLower().Contains(name))
+            //        continue;
 
-                if (p.getPrice() < min_price ||
-                     (max_price != 0 && p.getPrice() > max_price))
-                    continue;
+            //    if (p.getPrice() < min_price ||
+            //         (max_price != 0 && p.getPrice() > max_price))
+            //        continue;
 
-                if (p.getScore() < rating)
-                    continue;
+            //    if (p.getScore() < rating)
+            //        continue;
 
-                if (checkBox1.Checked && p.getQuantity() == 0)
-                    continue;
+            //    if (checkBox1.Checked && p.getQuantity() == 0)
+            //        continue;
 
-                getNextPos(out int x, out int y);
-                PictureBox pb = new PictureBox();
-                pb.Load("pictures\\" + p.getPhotoName());
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                pb.Size = new Size(200, 100);
-                panel1.Controls.Add(pb);
-                pb.Location = new Point(x, y);
-                pb.Name = p.getName();
+            //    getNextPos(out int x, out int y);
+            //    PictureBox pb = new PictureBox();
+            //    pb.Load("pictures\\" + p.getPhotoName());
+            //    pb.SizeMode = PictureBoxSizeMode.StretchImage;
+            //    pb.Size = new Size(200, 100);
+            //    panel1.Controls.Add(pb);
+            //    pb.Location = new Point(x, y);
+            //    pb.Name = p.getName();
 
-                pb.MouseClick += new MouseEventHandler(PageOpener);
+            //    pb.MouseClick += new MouseEventHandler(PageOpener);
 
-                productsIndex.Add(Program.getProducts().IndexOf(p));
+            //   // productsIndex.Add(Program.getProducts().IndexOf(p));
 
-            }
+            //}
 
         }
 
@@ -189,8 +175,8 @@ namespace WindowsFormsApp1
                 
                 if (c.Equals(sender))
                 {
-                    Form2 f2 = new Form2(productsIndex.ElementAt(i));
-                    f2.Show();
+                    //Form2 f2 = new Form2(productsIndex.ElementAt(i));
+                    Program.getForm2().Show();
                 }
                 i++;
             }
@@ -213,32 +199,17 @@ namespace WindowsFormsApp1
 
         public void SetUsername()
         {
-            if (Program.getCurrentAccount() == null)
-            {
-                button3.Hide();
-                button2.Show();
 
-                textBox4.Text = "";
-                textBox5.Text = "";
-                AddPicture.Show();
+            buttonSettings.Show();
 
-            }
-            else
-            {
-                button2.Hide();
-                button3.Show();
-
-                textBox4.Text = Program.getCurrentAccount().getName();
-                textBox5.Text = Program.getCurrentAccount().getMoney().ToString();
-
+            textBox4.Text = Program.getCurrentAccount().getName();
+            textBox5.Text = Program.getCurrentAccount().getMoney().ToString();
                 /*
                 if(Program.getCurrentAccount().getPremium()==true)
                     AddPicture.Hide();
                 else
                     AddPicture.Show(); ;
                     */
-
-            }
             
         }
 
@@ -254,16 +225,16 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Program.f3.Show();
-            Program.f1.Show();
+            Program.getLogInForm().Show();
+            Program.getForm1().Show();
         }
 
-        private void button3_Click_1(object sender, EventArgs e)
+        private void buttonSettings_Click(object sender, EventArgs e)
         {
             if (Program.getCurrentAccount() != null)
             {
-                Form5 f5 = new Form5();
-                f5.Show();
+                Program.getControlForm().Show();
+                Program.getForm1().Hide();
             }
         }
 
@@ -279,7 +250,7 @@ namespace WindowsFormsApp1
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -290,10 +261,10 @@ namespace WindowsFormsApp1
         private void button5_Click(object sender, EventArgs e)
         {
 
-            if (Program.getCurrentAccount().getAdmin())
-                textBox6.Text = "admin acc";
+            if (Program.getCurrentAccount().getPremium())
+                textBox6.Text = "premium acc";
             else
-                textBox6.Text = "NOT admin acc";
+                textBox6.Text = "NOT premium acc";
         }
     }
 }
