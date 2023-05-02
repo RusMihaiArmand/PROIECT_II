@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -21,20 +22,71 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
 
-            buttonSettings.Hide();
+            panel1.Controls.Clear();
 
-            while (panel1.Controls.Count > 0)
-                foreach (Control c in panel1.Controls)
-                {
-                    //groupBox1.Controls.Remove(c);
-                    panel1.Controls.Remove(c);
-                }
+            //while (panel1.Controls.Count > 0)
+            //    foreach (Control c in panel1.Controls)
+            //    {
+            //        //groupBox1.Controls.Remove(c);
+            //        panel1.Controls.Remove(c);
+            //    }
 
             
 
             productsIndex.Clear();
 
-            Random rand = new Random();
+            SqlConnection con = new SqlConnection(Program.getConString());
+
+            //con.Open();
+            //SqlCommand com1 = new SqlCommand("select count(*) from SportEvents", con);
+            //SqlDataReader reader1 = com1.ExecuteReader();
+
+            //int nr;
+            //if (reader1.Read())
+            //{
+            //    Int32.TryParse(reader1[0].ToString(), out nr);
+            //}
+            //else
+            //    nr = 0;
+            //con.Close();
+
+
+
+            con.Open();
+            SqlCommand com1 = new SqlCommand("select id,img from SportEvents", con);
+            SqlDataReader reader1 = com1.ExecuteReader();
+            
+
+
+            while(reader1.Read())
+            {
+
+                getNextPos(out int x, out int y);
+                PictureBox pb = new PictureBox();
+
+                if (reader1[1] == DBNull.Value)
+                {
+                    pb.Image = null;
+                }
+                else
+                {
+
+                    byte[] img = (byte[])(reader1[1]);
+                    MemoryStream ms = new MemoryStream(img);
+                    pb.Image = Image.FromStream(ms);
+                }
+
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Size = new Size(200, 100);
+                panel1.Controls.Add(pb);
+                pb.Location = new Point(x, y);
+                
+                pb.MouseClick += new MouseEventHandler(PageOpener);
+
+
+            }
+
+            con.Close();
 
             //foreach (Product p in Program.getProducts())
             //{
@@ -55,10 +107,10 @@ namespace WindowsFormsApp1
             //}
 
 
-
+            Random rand = new Random();
             int pictureCount = Directory.GetFiles("ads").Length;
-            int nr = rand.Next(0, pictureCount);
-            AddPicture.Load("ads\\ad" + nr + ".jpg");
+            int numbr = rand.Next(0, pictureCount);
+            AddPicture.Load("ads\\ad" + numbr + ".jpg");
 
 
             System.Timers.Timer myTimer = new System.Timers.Timer();
@@ -200,10 +252,10 @@ namespace WindowsFormsApp1
         public void SetUsername()
         {
 
-            buttonSettings.Show();
+            //buttonSettings.Show();
 
-            textBox4.Text = Program.getCurrentAccount().getName();
-            textBox5.Text = Program.getCurrentAccount().getMoney().ToString();
+            //textBox4.Text = Program.getCurrentAccount().getName();
+            //textBox5.Text = Program.getCurrentAccount().getMoney().ToString();
                 /*
                 if(Program.getCurrentAccount().getPremium()==true)
                     AddPicture.Hide();

@@ -33,6 +33,18 @@ namespace WindowsFormsApp1
 
             
         }
+
+        public int maxEvents()
+        {
+            if (this.isAdmin)
+                return 999;
+
+            if (this.hasPremium)
+                return 10;
+
+            return 2;
+
+        }
         
 
         public double getMoney()
@@ -47,7 +59,7 @@ namespace WindowsFormsApp1
         {
             this.money = this.money + n;
 
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("update utilizator set wallet=@mon where username=@name", con);
 

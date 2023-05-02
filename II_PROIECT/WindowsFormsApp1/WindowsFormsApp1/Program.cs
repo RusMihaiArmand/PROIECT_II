@@ -15,9 +15,17 @@ namespace WindowsFormsApp1
         private static FormLogIn fLogIn;
         private static FormSignUp fSignUp;
         private static FormControls fControls;
-        public static Form6 f6;
+        public static FormEventControl fEventControl;
+
+        private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
 
         private static Account current_account = null;
+
+        public static string getConString()
+        {
+            return connectionString;
+        }
+
 
         public static void setForm1(Form1 f)
         {
@@ -64,13 +72,13 @@ namespace WindowsFormsApp1
         }
 
 
-        public static void setForm6(Form6 f)
+        public static void setFormEventControl(FormEventControl f)
         {
-            Program.f6 = f;
+            Program.fEventControl = f;
         }
-        public static Form6 getForm6()
+        public static FormEventControl getFormEventControl()
         {
-            return Program.f6;
+            return Program.fEventControl;
         }
 
 

@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from studenti where id=@id", con);
             com1.Parameters.AddWithValue("id", textBox1.Text);

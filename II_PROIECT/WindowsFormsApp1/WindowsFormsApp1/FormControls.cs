@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
                     buttonPremium.Hide();
 
 
-                    SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+                    SqlConnection con = new SqlConnection(Program.getConString());
                     con.Open();
                     SqlCommand com1 = new SqlCommand("update utilizator set premiumUntil=@date where username=@name", con);
 
@@ -111,7 +111,7 @@ namespace WindowsFormsApp1
         private void buttonEventAdder_Click(object sender, EventArgs e)
         {
             Program.getControlForm().Hide();
-            Program.getForm6().Show();
+            Program.getFormEventControl().Show();
         }
 
         private void Form5_Load(object sender, EventArgs e)

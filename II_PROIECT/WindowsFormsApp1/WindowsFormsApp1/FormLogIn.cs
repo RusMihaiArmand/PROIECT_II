@@ -20,13 +20,13 @@ namespace WindowsFormsApp1
             Program.setForm2(new Form2());
             Program.setSignUpForm( new FormSignUp() );
             Program.setControlForm(new FormControls());
-            Program.setForm6(new Form6());
+            Program.setFormEventControl(new FormEventControl());
 
             Program.getForm1().Hide();
             Program.getForm2().Hide();
             Program.getSignUpForm().Hide();
             Program.getControlForm().Hide();
-            Program.getForm6().Hide();
+            Program.getFormEventControl().Hide();
 
         }
 
@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
             string pass = textBoxPass.Text;
 
 
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name", con);
             com1.Parameters.AddWithValue("name", textBoxUser.Text);

@@ -77,11 +77,11 @@
     <Compile Include="FormControls.Designer.cs">
       <DependentUpon>FormControls.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form6.cs">
+    <Compile Include="FormEventControl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form6.Designer.cs">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <Compile Include="FormEventControl.Designer.cs">
+      <DependentUpon>FormEventControl.cs</DependentUpon>
     </Compile>
     <Compile Include="FormTesting.cs">
       <SubType>Form</SubType>
@@ -107,8 +107,8 @@
     <EmbeddedResource Include="FormControls.resx">
       <DependentUpon>FormControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form6.resx">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <EmbeddedResource Include="FormEventControl.resx">
+      <DependentUpon>FormEventControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTesting.resx">
       <DependentUpon>FormTesting.cs</DependentUpon>

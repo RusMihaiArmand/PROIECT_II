@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
 
         private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+            SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name", con);
             com1.Parameters.AddWithValue("name", textBoxUser.Text);
@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
                                     textBoxError.Text = "invalid mail";
                                 else
                                 {
-                                    con = new SqlConnection("Data Source=.;Initial Catalog=STUD;Integrated Security=True");
+                                    con = new SqlConnection(Program.getConString());
                                     con.Open();
                                     SqlCommand com2 = new SqlCommand("insert into utilizator values(@nameUt,@pass," +
                                         "@email,0, '"+ DateTime.Now.AddDays(-1).ToString() + "')", con);
