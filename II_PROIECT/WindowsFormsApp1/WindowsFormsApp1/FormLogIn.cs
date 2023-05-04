@@ -46,9 +46,6 @@ namespace WindowsFormsApp1
 
         private void buttonLogIn_Click(object sender, EventArgs e)
         {
-           // List<Account> accountsList = Program.getAccounts();
-
-            //string name = textBox1.Text;
             string pass = textBoxPass.Text;
 
 
@@ -77,32 +74,29 @@ namespace WindowsFormsApp1
 
                     DateTime time = DateTime.Parse(reader1["premiumUntil"].ToString());
 
-
-
                     Account ac = new Account(reader1["username"].ToString(), reader1["passwrd"].ToString(),
                         reader1["email"].ToString(), money, adminStatus, premiumStatus, time);
 
                     Program.SetCurrentAccount(ac);
-
                     ClearTextBoxes();
 
                     Program.getForm1().Show();
                     Program.getLogInForm().Hide();
 
+
+                    Program.getControlForm().PremiumCheck();
+                    
+
                 }
                 else
                 {
                     textBoxErrorPassword.Text = "Wrong password";
-
-                }
-                
+                }      
             }
             else
             {
                 textBoxErrorPassword.Text = "Wrong username";
             }
-
-
             con.Close();
         }
 
@@ -112,14 +106,6 @@ namespace WindowsFormsApp1
             Close();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }

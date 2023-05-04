@@ -53,7 +53,7 @@ namespace WindowsFormsApp1
 
 
             con.Open();
-            SqlCommand com1 = new SqlCommand("select id,img from SportEvents", con);
+            SqlCommand com1 = new SqlCommand("select id,img,evName from SportEvents", con);
             SqlDataReader reader1 = com1.ExecuteReader();
             
 
@@ -82,6 +82,22 @@ namespace WindowsFormsApp1
                 pb.Location = new Point(x, y);
                 
                 pb.MouseClick += new MouseEventHandler(PageOpener);
+
+
+                //PictureBox pb2 = new PictureBox();
+                //panel1.Controls.Add(pb2);
+
+                Label lb = new Label();
+                lb.Size = new Size(200, 70);
+                panel1.Controls.Add(lb);
+                lb.Text = reader1[2].ToString();
+                lb.Location = new Point(x, y + 110);
+
+                //Label lb = new Label();
+                //lb.Size = new Size(200, 70);
+                //lb.Controls.Add(pb);
+                //lb.Text = reader1[2].ToString();
+                //lb.Location = new Point(x, y+110);
 
 
             }
@@ -131,12 +147,14 @@ namespace WindowsFormsApp1
         private void getNextPos(out int x, out int y)
         {
             int c = panel1.Controls.Count;
+             c = c/2;
 
             int cc = c % 3;
             c = c / 3;
 
             x =  cc * 210;
-            y =  c * 140;
+            y =  c * 180;
+           // y = c * 100;
 
 
 

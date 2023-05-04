@@ -15,7 +15,7 @@ namespace WindowsFormsApp1
         private static FormLogIn fLogIn;
         private static FormSignUp fSignUp;
         private static FormControls fControls;
-        public static FormEventControl fEventControl;
+        private static FormEventControl fEventControl;
 
         private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
 

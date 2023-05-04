@@ -32,6 +32,15 @@ namespace WindowsFormsApp1
 
         }
 
+        public void PremiumCheck()
+        {
+            if (Program.getCurrentAccount().getPremium() || Program.getCurrentAccount().getAdmin())
+                buttonPremium.Hide();
+            else
+                buttonPremium.Show();
+
+        }
+
         private void buttonSignOut_Click(object sender, EventArgs e)
         {
             Program.SetCurrentAccount(null);
@@ -62,7 +71,7 @@ namespace WindowsFormsApp1
 
                 if(s>0)
                 {
-                    MessageBox.Show("Money added", "Message");
+                    
                     Program.getCurrentAccount().addMoney(s);
 
 
@@ -89,15 +98,35 @@ namespace WindowsFormsApp1
 
                     SqlConnection con = new SqlConnection(Program.getConString());
                     con.Open();
+                    SqlTransaction tx = con.BeginTransaction();
+
                     SqlCommand com1 = new SqlCommand("update utilizator set premiumUntil=@date where username=@name", con);
 
-                    string prDate =   DateTime.Now.AddDays(30).ToString()  ;
 
-                    com1.Parameters.AddWithValue("date", prDate);
-                    com1.Parameters.AddWithValue("name", Program.getCurrentAccount().getName());
+                    try
+                    {
+                        string prDate = DateTime.Now.AddDays(30).ToString();
 
-                    SqlDataReader reader1 = com1.ExecuteReader();
-                    con.Close();
+                        com1.Parameters.AddWithValue("date", prDate);
+                        com1.Parameters.AddWithValue("name", Program.getCurrentAccount().getName());
+
+
+                        com1.ExecuteNonQuery();
+                        tx.Commit();
+
+                        Program.getSignUpForm().Hide();
+                        Program.getLogInForm().Show();
+                    }
+                    catch (Exception exc)
+                    {
+                        tx.Rollback();
+                        MessageBox.Show("Error; contact admins for help", "Message");
+                    }
+                    finally
+                    {
+                        con.Close();
+                        PremiumCheck();
+                    }
 
 
                 }

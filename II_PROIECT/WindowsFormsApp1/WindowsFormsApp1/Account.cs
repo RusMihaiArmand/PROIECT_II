@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -61,13 +62,35 @@ namespace WindowsFormsApp1
 
             SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
+
+
             SqlCommand com1 = new SqlCommand("update utilizator set wallet=@mon where username=@name", con);
+            SqlTransaction tx = con.BeginTransaction();
 
-            com1.Parameters.AddWithValue("mon", this.money);
-            com1.Parameters.AddWithValue("name", this.name);
+            try
+            {
+                com1.Transaction = tx;
+                com1.Parameters.AddWithValue("mon", this.money);
+                com1.Parameters.AddWithValue("name", this.name);
+                com1.ExecuteNonQuery();
+                tx.Commit();
+                MessageBox.Show("Money added", "Message");
 
-            SqlDataReader reader1 = com1.ExecuteReader();
-            con.Close();
+            }
+            catch (Exception exc)
+            {
+                tx.Rollback();
+                MessageBox.Show("Error; no money added", "Message");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            
+
+            //SqlDataReader reader1 = com1.ExecuteReader();
+            
         }
 
 
@@ -126,19 +149,6 @@ namespace WindowsFormsApp1
         {
             this.premiumUntil = p;
         }
-
-
-        /*
-        override
-        public string ToString()
-        {
-            return this.name + "," + this.pass + "," + this.isAdmin.ToString() + "," +
-                this.hasPremium.ToString() + "," + this.money.ToString();
-
-        }
-        */
-
-
 
     }
 }

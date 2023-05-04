@@ -22,12 +22,11 @@ namespace WindowsFormsApp1
         {
             SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
-            SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name", con);
+            SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name or email=@mail", con);
             com1.Parameters.AddWithValue("name", textBoxUser.Text);
-
+            com1.Parameters.AddWithValue("mail", textBoxMail.Text);
             SqlDataReader reader1 = com1.ExecuteReader();
 
-            
 
             if (!reader1.Read())
             {
@@ -61,7 +60,6 @@ namespace WindowsFormsApp1
                                     problem = true;
                                 else
                                 {
-
                                     if (!Char.IsLetter(mail[0]) || !Char.IsLetter(mail[mail.Length - 1]))
                                     {
                                         problem = true;
@@ -90,7 +88,6 @@ namespace WindowsFormsApp1
                                     if (arPos == -1)
                                         problem = true;
 
-
                                     bool invalid = true;
 
                                     if (mail[arPos + 1] == '.')
@@ -105,10 +102,10 @@ namespace WindowsFormsApp1
                                     if (invalid)
                                         problem = true;
 
-                                    //end mail
+                                    
                                 }
 
-                                //to add mail errors
+                                //end mail
 
                                 if (problem)
                                     textBoxError.Text = "invalid mail";
@@ -116,39 +113,61 @@ namespace WindowsFormsApp1
                                 {
                                     con = new SqlConnection(Program.getConString());
                                     con.Open();
+
+                                    SqlTransaction tx = con.BeginTransaction();
                                     SqlCommand com2 = new SqlCommand("insert into utilizator values(@nameUt,@pass," +
-                                        "@email,0, '"+ DateTime.Now.AddDays(-1).ToString() + "')", con);
-                                    com2.Parameters.AddWithValue("nameUt", textBoxUser.Text);
-                                    com2.Parameters.AddWithValue("pass", textBoxPass.Text);
-                                    com2.Parameters.AddWithValue("email", textBoxMail.Text);
+                                        "@email,0, '" + DateTime.Now.AddDays(-1).ToString() + "')", con);
+                                    
 
-                                    reader1 = com2.ExecuteReader();
-                                    con.Close();
 
-                                    ClearText();
-                                    Program.getSignUpForm().Hide();
-                                    Program.getLogInForm().Show();
+                                    try
+                                    {
+                                        com2.Transaction = tx;
+                                        com2.Parameters.AddWithValue("nameUt", textBoxUser.Text);
+                                        com2.Parameters.AddWithValue("pass", textBoxPass.Text);
+                                        com2.Parameters.AddWithValue("email", textBoxMail.Text);
+
+                                        //reader1 = com2.ExecuteReader();
+
+                                        com2.ExecuteNonQuery();
+                                        tx.Commit();
+                                        ClearText();
+                                        Program.getSignUpForm().Hide();
+                                        Program.getLogInForm().Show();
+                                    }
+                                    catch(Exception exc)
+                                    {
+                                        tx.Rollback();
+                                        textBoxError.Text = "ERROR";
+                                    }
+                                    finally
+                                    {
+                                        con.Close();
+                                    }         
                                 }
-
-                                
-
                             }
-
                         }
-
                     }
-
                 }
-
             }
             else
             {
                 con.Close();
-                textBoxError.Text = "Username in use";
+
+                con.Open();
+                com1 = new SqlCommand("select * from utilizator where username=@name", con);
+                com1.Parameters.AddWithValue("name", textBoxUser.Text);
+                reader1 = com1.ExecuteReader();
+
+                if(reader1.Read())
+                {
+                    textBoxError.Text = "Username already in use";
+                }
+                else
+                {
+                    textBoxError.Text = "Mail already in use";
+                }
             }
-
-            
-
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -163,12 +182,6 @@ namespace WindowsFormsApp1
             textBoxUser.Text = "";
             textBoxPass.Text = "";
             textBoxMail.Text = "";
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
