@@ -10,12 +10,13 @@ namespace WindowsFormsApp1
 {
     static class Program
     {
-        private static Form1 f1;
-        private static Form2 f2;
+        private static FormMainMenu fMainMenu;
+        private static FormEventPage fEventPage;
         private static FormLogIn fLogIn;
         private static FormSignUp fSignUp;
         private static FormControls fControls;
         private static FormEventControl fEventControl;
+        private static FormAttending fAttend;
 
         private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
 
@@ -27,22 +28,22 @@ namespace WindowsFormsApp1
         }
 
 
-        public static void setForm1(Form1 f)
+        public static void setFormMainMenu(FormMainMenu f)
         {
-            Program.f1 = f;
+            Program.fMainMenu = f;
         }
-        public static Form1 getForm1()
+        public static FormMainMenu getFormMainMenu()
         {
-            return Program.f1;
+            return Program.fMainMenu;
         }
 
-        public static void setForm2(Form2 f)
+        public static void setFormEventPage(FormEventPage f)
         {
-            Program.f2 = f;
+            Program.fEventPage = f;
         }
-        public static Form2 getForm2()
+        public static FormEventPage getFormEventPage()
         {
-            return Program.f2;
+            return Program.fEventPage;
         }
 
 
@@ -71,7 +72,6 @@ namespace WindowsFormsApp1
             return Program.fControls;
         }
 
-
         public static void setFormEventControl(FormEventControl f)
         {
             Program.fEventControl = f;
@@ -79,6 +79,15 @@ namespace WindowsFormsApp1
         public static FormEventControl getFormEventControl()
         {
             return Program.fEventControl;
+        }
+
+        public static void setFormAttend(FormAttending f)
+        {
+            Program.fAttend = f;
+        }
+        public static FormAttending GetFormAttend()
+        {
+            return Program.fAttend;
         }
 
 
@@ -91,8 +100,6 @@ namespace WindowsFormsApp1
         public static void SetCurrentAccount(Account a)
         {
             current_account = a;
-
-            f1.SetUsername();
         }
 
         

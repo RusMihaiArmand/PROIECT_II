@@ -17,8 +17,6 @@ D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
-D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
-D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
@@ -29,3 +27,6 @@ D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormSignUp.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormControls.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventControl.resources
+D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormMainMenu.resources
+D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventPage.resources
+D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAttending.resources

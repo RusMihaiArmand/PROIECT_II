@@ -58,12 +58,16 @@
             this.textBoxCreator = new System.Windows.Forms.TextBox();
             this.textBoxDEBUG = new System.Windows.Forms.TextBox();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.buttonRef = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.buttonDelOld = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(498, 157);
+            this.buttonAdd.Location = new System.Drawing.Point(624, 157);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(171, 70);
             this.buttonAdd.TabIndex = 14;
@@ -154,7 +158,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(498, 77);
+            this.button1.Location = new System.Drawing.Point(624, 77);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 63);
             this.button1.TabIndex = 29;
@@ -164,7 +168,7 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(498, 342);
+            this.buttonDelete.Location = new System.Drawing.Point(624, 324);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(171, 63);
             this.buttonDelete.TabIndex = 30;
@@ -175,7 +179,7 @@
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonExit.Location = new System.Drawing.Point(748, 12);
+            this.buttonExit.Location = new System.Drawing.Point(874, 12);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(40, 36);
             this.buttonExit.TabIndex = 31;
@@ -272,7 +276,7 @@
             // 
             // buttonModify
             // 
-            this.buttonModify.Location = new System.Drawing.Point(498, 246);
+            this.buttonModify.Location = new System.Drawing.Point(624, 246);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(171, 70);
             this.buttonModify.TabIndex = 44;
@@ -326,12 +330,54 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
-            // Form6
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(424, 276);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(106, 116);
+            this.listBox1.TabIndex = 49;
+            // 
+            // buttonRef
+            // 
+            this.buttonRef.Location = new System.Drawing.Point(440, 399);
+            this.buttonRef.Name = "buttonRef";
+            this.buttonRef.Size = new System.Drawing.Size(75, 33);
+            this.buttonRef.TabIndex = 50;
+            this.buttonRef.Text = "Refresh";
+            this.buttonRef.UseVisualStyleBackColor = true;
+            this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(440, 246);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(72, 17);
+            this.label11.TabIndex = 51;
+            this.label11.Text = "My events";
+            // 
+            // buttonDelOld
+            // 
+            this.buttonDelOld.Location = new System.Drawing.Point(624, 412);
+            this.buttonDelOld.Name = "buttonDelOld";
+            this.buttonDelOld.Size = new System.Drawing.Size(171, 42);
+            this.buttonDelOld.TabIndex = 52;
+            this.buttonDelOld.Text = "DELETE OLD";
+            this.buttonDelOld.UseVisualStyleBackColor = true;
+            this.buttonDelOld.Click += new System.EventHandler(this.buttonDelOld_Click);
+            // 
+            // FormEventControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 646);
+            this.ClientSize = new System.Drawing.Size(955, 646);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonDelOld);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.buttonRef);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBoxCreator);
@@ -363,8 +409,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonAdd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form6";
-            this.Text = "Form6";
+            this.Name = "FormEventControl";
+            this.Text = "Event Control";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -403,5 +449,9 @@
         private System.Windows.Forms.TextBox textBoxCreator;
         private System.Windows.Forms.TextBox textBoxDEBUG;
         private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button buttonRef;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button buttonDelOld;
     }
 }

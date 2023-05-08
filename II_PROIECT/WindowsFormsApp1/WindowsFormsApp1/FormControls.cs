@@ -43,6 +43,7 @@ namespace WindowsFormsApp1
 
         private void buttonSignOut_Click(object sender, EventArgs e)
         {
+            textBoxFunds.Text = "";
             Program.SetCurrentAccount(null);
             Program.getControlForm().Hide();
 
@@ -67,13 +68,13 @@ namespace WindowsFormsApp1
                 if (s < 0)
                     s = 0;
 
-                textBoxFunds.Text = s.ToString();
+                textBoxFunds.Text = "";
 
                 if(s>0)
                 {
                     
                     Program.getCurrentAccount().addMoney(s);
-
+                    Program.getFormMainMenu().Updater();
 
                 }
 
@@ -91,10 +92,7 @@ namespace WindowsFormsApp1
                     Program.getCurrentAccount().addMoney(-50);
                     Program.getCurrentAccount().setPremium(true);
 
-                    Program.getForm1().SetUsername();
-
                     buttonPremium.Hide();
-
 
                     SqlConnection con = new SqlConnection(Program.getConString());
                     con.Open();
@@ -126,6 +124,7 @@ namespace WindowsFormsApp1
                     {
                         con.Close();
                         PremiumCheck();
+                        Program.getFormMainMenu().PremiumCheck();
                     }
 
 
@@ -139,6 +138,7 @@ namespace WindowsFormsApp1
 
         private void buttonEventAdder_Click(object sender, EventArgs e)
         {
+            textBoxFunds.Text = "";
             Program.getControlForm().Hide();
             Program.getFormEventControl().Show();
         }
@@ -146,6 +146,172 @@ namespace WindowsFormsApp1
         private void Form5_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            textBoxFunds.Text = "";
+            Program.getControlForm().Hide();
+            Program.getFormMainMenu().Show();
+        }
+
+        private void buttonAtt_Click(object sender, EventArgs e)
+        {
+            textBoxFunds.Text = "";
+            Program.GetFormAttend().Show();
+            Program.GetFormAttend().Clear();
+            Program.getControlForm().Hide();
+        }
+
+        private void buttonAccountDelete_Click(object sender, EventArgs e)
+        {
+            textBoxFunds.Text = "";
+
+            DialogResult dialogResult = MessageBox.Show("Are you sure?", "WARNING", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if(Program.getCurrentAccount().getAdmin())
+                {
+                    MessageBox.Show("Can't delete admin accounts like that", "No");
+                }
+                else
+                {
+
+
+                    SqlConnection con = new SqlConnection(Program.getConString());
+
+                    con.Open();
+                    SqlCommand com1 = new SqlCommand("select id from SportEvents where creator like '"
+                            + Program.getCurrentAccount().getName() + "'", con);
+
+                    SqlDataReader reader1 = com1.ExecuteReader();
+
+                    List<int> listId = new List<int>();
+
+                    int id;
+                    while (reader1.Read())
+                    {
+                        Int32.TryParse(reader1[0].ToString(), out id);
+
+                        listId.Add(id);
+                    }
+
+                    con.Close();
+
+                    foreach (int ide in listId)
+                    {
+                        con.Open();
+                        com1 = new SqlCommand("delete from Attending where idEvent=@id", con);
+                        SqlTransaction tx = con.BeginTransaction();
+
+
+
+                        try
+                        {
+                            com1.Transaction = tx;
+                            com1.Parameters.AddWithValue("id", ide);
+                            com1.ExecuteNonQuery();
+
+                            tx.Commit();
+
+                        }
+                        catch (Exception exc)
+                        {
+                            tx.Rollback();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+
+                        con.Open();
+
+                        com1 = new SqlCommand("delete from SportEvents where id=@id", con);
+                        tx = con.BeginTransaction();
+
+                        try
+                        {
+                            com1.Transaction = tx;
+
+                            com1.Parameters.AddWithValue("id", ide);
+                            com1.ExecuteNonQuery();
+
+                            tx.Commit();
+
+                        }
+                        catch (Exception exc)
+                        {
+                            tx.Rollback();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+
+
+                    }
+
+
+
+                    con.Open();
+                    com1 = new SqlCommand("delete from attending where userName like '"
+                            + Program.getCurrentAccount().getName() + "'", con);
+
+                    SqlTransaction tx2 = con.BeginTransaction();
+
+                    try
+                    {
+                        com1.Transaction = tx2;
+                        com1.ExecuteNonQuery();
+
+                        tx2.Commit();
+
+                    }
+                    catch (Exception exc)
+                    {
+                        tx2.Rollback();
+                        
+                    }
+                    finally
+                    {
+                        con.Close();
+
+
+                    }
+
+
+                    con.Open();
+                    com1 = new SqlCommand("delete from utilizator where username like '"
+                            + Program.getCurrentAccount().getName() + "'", con);
+
+                    tx2 = con.BeginTransaction();
+
+                    try
+                    {
+                        com1.Transaction = tx2;
+                        com1.ExecuteNonQuery();
+
+                        tx2.Commit();
+
+                    }
+                    catch (Exception exc)
+                    {
+                        tx2.Rollback();
+                        MessageBox.Show("Something went wrong", "ERROR");
+                    }
+                    finally
+                    {
+                        con.Close();
+
+                        Program.SetCurrentAccount(null);
+                        Program.getLogInForm().Show();
+                        Program.getControlForm().Hide();
+
+                    }
+
+
+                }
+            }
         }
     }
 }

@@ -16,17 +16,19 @@ namespace WindowsFormsApp1
         public FormLogIn()
         {
             InitializeComponent();
-            Program.setForm1(new Form1() ) ;
-            Program.setForm2(new Form2());
+            Program.setFormMainMenu(new FormMainMenu() ) ;
+            Program.setFormEventPage(new FormEventPage());
             Program.setSignUpForm( new FormSignUp() );
             Program.setControlForm(new FormControls());
             Program.setFormEventControl(new FormEventControl());
+            Program.setFormAttend(new FormAttending());
 
-            Program.getForm1().Hide();
-            Program.getForm2().Hide();
+            Program.getFormMainMenu().Hide();
+            Program.getFormEventPage().Hide();
             Program.getSignUpForm().Hide();
             Program.getControlForm().Hide();
             Program.getFormEventControl().Hide();
+            Program.GetFormAttend().Hide();
 
         }
 
@@ -77,15 +79,22 @@ namespace WindowsFormsApp1
                     Account ac = new Account(reader1["username"].ToString(), reader1["passwrd"].ToString(),
                         reader1["email"].ToString(), money, adminStatus, premiumStatus, time);
 
+
+
                     Program.SetCurrentAccount(ac);
                     ClearTextBoxes();
 
-                    Program.getForm1().Show();
+                    Program.getFormMainMenu().Updater();
+                    Program.getFormMainMenu().Show();
                     Program.getLogInForm().Hide();
 
+                    Program.getFormMainMenu().Clear();
+                    Program.getFormMainMenu().ShowProducts();
 
                     Program.getControlForm().PremiumCheck();
-                    
+                    Program.getFormMainMenu().PremiumCheck();
+
+                    Program.getFormEventControl().CheckAdmin();
 
                 }
                 else

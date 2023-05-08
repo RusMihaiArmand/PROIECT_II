@@ -41,6 +41,7 @@ namespace WindowsFormsApp1
             pictureBox1.Image = null;
             textBoxDEBUG.Text = "";
 
+            listBox1.Items.Clear();
         }
 
         private void buttonFind_Click(object sender, EventArgs e)
@@ -218,7 +219,7 @@ namespace WindowsFormsApp1
                     DateTime de = DateTime.Parse(dateTimePickerEnd.Text);
 
                     if (textBoxName.Text.Length < 3 || textBoxLocation.Text.Length < 3 || de <= ds ||
-                        textBoxName.Text.Length > 30 || textBoxLocation.Text.Length > 60)
+                        de<DateTime.Now || textBoxName.Text.Length > 30 || textBoxLocation.Text.Length > 60)
                     {
                         textBoxDEBUG.Text = "ERROR";
                     }
@@ -266,6 +267,7 @@ namespace WindowsFormsApp1
                             Clear();         
                             com1.ExecuteNonQuery();
                             tx.Commit();
+                            textBoxDEBUG.Text = "";
                         }
                         catch (Exception exc)
                         {
@@ -308,7 +310,7 @@ namespace WindowsFormsApp1
                 DateTime de = DateTime.Parse(dateTimePickerEnd.Text);
 
                 if (textBoxName.Text.Length < 3 || textBoxLocation.Text.Length < 3 || de<=ds ||
-                        textBoxName.Text.Length > 30 || textBoxLocation.Text.Length > 60)
+                      de < DateTime.Now || textBoxName.Text.Length > 30 || textBoxLocation.Text.Length > 60)
                 {
                     textBoxDEBUG.Text = "ERROR";
                 }
@@ -371,6 +373,7 @@ namespace WindowsFormsApp1
 
                                 com1.ExecuteNonQuery();
                                 tx.Commit();
+                                textBoxDEBUG.Text = "";
                             }
                             catch (Exception exc)
                             {
@@ -409,5 +412,121 @@ namespace WindowsFormsApp1
             Program.getFormEventControl().Hide();
             Program.getControlForm().Show();
         }
+
+        private void buttonRef_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(Program.getConString());
+
+            con.Open();
+            SqlCommand com1 = new SqlCommand("select id from SportEvents where creator like '" 
+                + Program.getCurrentAccount().getName()  +  "'", con);
+
+            SqlDataReader reader1 = com1.ExecuteReader();
+
+            listBox1.Items.Clear();
+
+            while(reader1.Read())
+            {
+                string id = reader1[0].ToString();
+
+                listBox1.Items.Add(id);
+
+            }
+
+            con.Close();
+        }
+
+        private void buttonDelOld_Click(object sender, EventArgs e)
+        {
+
+            SqlConnection con = new SqlConnection(Program.getConString());
+
+            con.Open();
+            SqlCommand com1 = new SqlCommand("select id from SportEvents where dateEnd <  GETDATE()", con);
+
+            SqlDataReader reader1 = com1.ExecuteReader();
+
+            List<int> listId = new List<int>();
+
+            int id;
+            while (reader1.Read())
+            {
+                Int32.TryParse( reader1[0].ToString(), out id);
+
+                listId.Add(id);
+            }
+
+            con.Close();
+
+            foreach(int ide in listId)
+            {
+                con.Open();
+                com1 = new SqlCommand("delete from Attending where idEvent=@id", con);
+                SqlTransaction tx = con.BeginTransaction();
+
+
+
+                try
+                {
+                    com1.Transaction = tx;
+                    com1.Parameters.AddWithValue("id", ide);
+                    com1.ExecuteNonQuery();
+
+                    tx.Commit();
+                    Clear();
+
+                }
+                catch (Exception exc)
+                {
+                    tx.Rollback();
+                    textBoxDEBUG.Text = "ERROR";
+                }
+                finally
+                {
+                    con.Close();
+                }
+
+                con.Open();
+
+                com1 = new SqlCommand("delete from SportEvents where id=@id", con);
+                tx = con.BeginTransaction();
+
+                try
+                {
+                    com1.Transaction = tx;
+
+                    com1.Parameters.AddWithValue("id", ide);
+                    com1.ExecuteNonQuery();
+
+                    tx.Commit();
+                    Clear();
+
+                }
+                catch (Exception exc)
+                {
+                    tx.Rollback();
+                    textBoxDEBUG.Text = "ERROR";
+                }
+                finally
+                {
+                    con.Close();
+                }
+
+
+            }
+      
+
+        }
+
+        public void CheckAdmin()
+        {
+            if (Program.getCurrentAccount().getAdmin())
+                buttonDelOld.Show();
+            else
+                buttonDelOld.Hide();
+
+        }
+          
+
     }
 }

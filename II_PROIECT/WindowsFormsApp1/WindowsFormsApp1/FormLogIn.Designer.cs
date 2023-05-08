@@ -87,7 +87,6 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(176, 22);
             this.textBoxUser.TabIndex = 4;
-            this.textBoxUser.Text = "admin";
             // 
             // textBoxPass
             // 
@@ -96,7 +95,6 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(176, 22);
             this.textBoxPass.TabIndex = 5;
-            this.textBoxPass.Text = "1234";
             // 
             // textBoxErrorPassword
             // 

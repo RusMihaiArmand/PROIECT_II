@@ -58,7 +58,6 @@ namespace WindowsFormsApp1
         }
         public void addMoney(double n)
         {
-            this.money = this.money + n;
 
             SqlConnection con = new SqlConnection(Program.getConString());
             con.Open();
@@ -70,10 +69,11 @@ namespace WindowsFormsApp1
             try
             {
                 com1.Transaction = tx;
-                com1.Parameters.AddWithValue("mon", this.money);
+                com1.Parameters.AddWithValue("mon", this.money+n);
                 com1.Parameters.AddWithValue("name", this.name);
                 com1.ExecuteNonQuery();
                 tx.Commit();
+                this.money = this.money + n;
                 MessageBox.Show("Money added", "Message");
 
             }
