@@ -18,7 +18,15 @@ namespace WindowsFormsApp1
         private static FormEventControl fEventControl;
         private static FormAttending fAttend;
 
-        private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
+
+        // private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
+        // DESKTOP-A5P03KC
+
+        //private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Integrated Security=True";
+
+        //SQLstuff
+        private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Persist Security Info=True;User ID=SQLstuff; Password=SQLstuff";
+
 
         private static Account current_account = null;
 
