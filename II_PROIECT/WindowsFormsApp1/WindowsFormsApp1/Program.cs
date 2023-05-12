@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
         private static FormControls fControls;
         private static FormEventControl fEventControl;
         private static FormAttending fAttend;
-
+        private static FormAdv fAdv;
 
         // private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
         // DESKTOP-A5P03KC
@@ -93,11 +93,20 @@ namespace WindowsFormsApp1
         {
             Program.fAttend = f;
         }
-        public static FormAttending GetFormAttend()
+        public static FormAttending getFormAttend()
         {
             return Program.fAttend;
         }
 
+
+        public static void setFormAdvertisement(FormAdv f)
+        {
+            Program.fAdv = f;
+        }
+        public static FormAdv getFormAdvertisement()
+        {
+            return Program.fAdv;
+        }
 
 
 

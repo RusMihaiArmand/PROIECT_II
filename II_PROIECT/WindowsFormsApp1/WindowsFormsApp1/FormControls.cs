@@ -41,6 +41,15 @@ namespace WindowsFormsApp1
 
         }
 
+        public void CheckAdmin()
+        {
+            if (!Program.getCurrentAccount().getAdmin())
+                buttonAdv.Hide();
+            else
+                buttonAdv.Show();
+
+        }
+
         private void buttonSignOut_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
@@ -158,8 +167,8 @@ namespace WindowsFormsApp1
         private void buttonAtt_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
-            Program.GetFormAttend().Show();
-            Program.GetFormAttend().Clear();
+            Program.getFormAttend().Show();
+            Program.getFormAttend().Clear();
             Program.getControlForm().Hide();
         }
 
@@ -312,6 +321,13 @@ namespace WindowsFormsApp1
 
                 }
             }
+        }
+
+        private void buttonAdv_Click(object sender, EventArgs e)
+        {
+            textBoxFunds.Text = "";
+            Program.getControlForm().Hide();
+            Program.getFormAdvertisement().Show();
         }
     }
 }

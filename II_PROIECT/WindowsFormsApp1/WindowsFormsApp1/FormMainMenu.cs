@@ -69,10 +69,34 @@ namespace WindowsFormsApp1
 
         public void TimeUp(object source, ElapsedEventArgs e)
         {
-            Random rand = new Random();
-            int pictureCount = Directory.GetFiles("ads").Length;
-            int nr = rand.Next(0, pictureCount);
-            AddPicture.Load("ads\\ad" + nr + ".jpg");
+            try
+            {
+                SqlConnection con = new SqlConnection(Program.getConString());
+                con.Open();
+                SqlCommand com1 = new SqlCommand("select top 1 img from Advertisements order by newid()", con);
+
+                SqlDataReader reader1 = com1.ExecuteReader();
+
+                if (reader1.Read())
+                {
+                    byte[] img;
+                    img = (byte[])(reader1["img"]);
+
+                    MemoryStream ms = new MemoryStream(img);
+                    AddPicture.Image = Image.FromStream(ms);
+
+                }
+
+
+                    con.Close();
+
+            }
+            catch(Exception esc)
+            { }
+            //Random rand = new Random();
+            //int pictureCount = Directory.GetFiles("ads").Length;
+            //int nr = rand.Next(0, pictureCount);
+            //AddPicture.Load("ads\\ad" + nr + ".jpg");
         }
 
         private void getNextPos(out int x, out int y)

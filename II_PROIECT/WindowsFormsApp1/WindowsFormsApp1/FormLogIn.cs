@@ -22,13 +22,14 @@ namespace WindowsFormsApp1
             Program.setControlForm(new FormControls());
             Program.setFormEventControl(new FormEventControl());
             Program.setFormAttend(new FormAttending());
+            Program.setFormAdvertisement(new FormAdv());
 
             Program.getFormMainMenu().Hide();
             Program.getFormEventPage().Hide();
             Program.getSignUpForm().Hide();
             Program.getControlForm().Hide();
             Program.getFormEventControl().Hide();
-            Program.GetFormAttend().Hide();
+            Program.getFormAdvertisement().Hide();
 
         }
 
@@ -91,6 +92,7 @@ namespace WindowsFormsApp1
                     Program.getFormMainMenu().Clear();
                     Program.getFormMainMenu().ShowProducts();
 
+                    Program.getControlForm().CheckAdmin();
                     Program.getControlForm().PremiumCheck();
                     Program.getFormMainMenu().PremiumCheck();
 

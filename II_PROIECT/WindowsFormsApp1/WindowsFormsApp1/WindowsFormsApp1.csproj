@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="FormAdv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdv.Designer.cs">
+      <DependentUpon>FormAdv.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAttending.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAdv.resx">
+      <DependentUpon>FormAdv.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAttending.resx">
       <DependentUpon>FormAttending.cs</DependentUpon>
     </EmbeddedResource>

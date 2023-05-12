@@ -37,6 +37,7 @@
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonAtt = new System.Windows.Forms.Button();
             this.buttonAccountDelete = new System.Windows.Forms.Button();
+            this.buttonAdv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonSignOut
@@ -130,12 +131,23 @@
             this.buttonAccountDelete.UseVisualStyleBackColor = false;
             this.buttonAccountDelete.Click += new System.EventHandler(this.buttonAccountDelete_Click);
             // 
+            // buttonAdv
+            // 
+            this.buttonAdv.Location = new System.Drawing.Point(198, 310);
+            this.buttonAdv.Name = "buttonAdv";
+            this.buttonAdv.Size = new System.Drawing.Size(180, 70);
+            this.buttonAdv.TabIndex = 9;
+            this.buttonAdv.Text = "ADD ADVERTISEMENT";
+            this.buttonAdv.UseVisualStyleBackColor = true;
+            this.buttonAdv.Click += new System.EventHandler(this.buttonAdv_Click);
+            // 
             // FormControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 463);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonAdv);
             this.Controls.Add(this.buttonAccountDelete);
             this.Controls.Add(this.buttonAtt);
             this.Controls.Add(this.buttonBack);
@@ -165,5 +177,6 @@
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Button buttonAtt;
         private System.Windows.Forms.Button buttonAccountDelete;
+        private System.Windows.Forms.Button buttonAdv;
     }
 }

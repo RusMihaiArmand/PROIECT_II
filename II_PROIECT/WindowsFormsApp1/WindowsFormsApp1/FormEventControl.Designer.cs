@@ -39,10 +39,9 @@
             this.textBoxDesc = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.textBoxPhotoId = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonFind = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonImg = new System.Windows.Forms.Button();
             this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
@@ -62,6 +61,7 @@
             this.buttonRef = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.buttonDelOld = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,18 +153,19 @@
             // 
             this.textBoxPhotoId.Location = new System.Drawing.Point(137, 260);
             this.textBoxPhotoId.Name = "textBoxPhotoId";
+            this.textBoxPhotoId.ReadOnly = true;
             this.textBoxPhotoId.Size = new System.Drawing.Size(100, 22);
             this.textBoxPhotoId.TabIndex = 28;
             // 
-            // button1
+            // buttonFind
             // 
-            this.button1.Location = new System.Drawing.Point(624, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(171, 63);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "FIND";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonFind_Click);
+            this.buttonFind.Location = new System.Drawing.Point(624, 77);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(171, 63);
+            this.buttonFind.TabIndex = 29;
+            this.buttonFind.Text = "FIND";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
             // 
             // buttonDelete
             // 
@@ -186,15 +187,6 @@
             this.buttonExit.Text = "X";
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(55, 399);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(182, 163);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
             // 
             // buttonImg
             // 
@@ -368,6 +360,15 @@
             this.buttonDelOld.UseVisualStyleBackColor = true;
             this.buttonDelOld.Click += new System.EventHandler(this.buttonDelOld_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(55, 399);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(182, 163);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormEventControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -396,7 +397,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonFind);
             this.Controls.Add(this.textBoxPhotoId);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.textBoxDesc);
@@ -430,7 +431,7 @@
         private System.Windows.Forms.TextBox textBoxDesc;
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.TextBox textBoxPhotoId;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonFind;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.PictureBox pictureBox1;

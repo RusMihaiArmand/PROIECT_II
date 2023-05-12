@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            Program.GetFormAttend().Hide();
+            Program.getFormAttend().Hide();
             Program.getControlForm().Show();
         }
 

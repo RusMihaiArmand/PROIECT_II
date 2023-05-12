@@ -30,3 +30,4 @@ D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormMainMenu.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventPage.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAttending.resources
+D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAdv.resources
