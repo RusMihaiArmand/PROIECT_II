@@ -19,18 +19,18 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void ButtonBack_Click(object sender, EventArgs e)
         {
-            Program.getFormAttend().Hide();
-            Program.getControlForm().Show();
+            Program.GetFormAttend().Hide();
+            Program.GetControlForm().Show();
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonFind_Click(object sender, EventArgs e)
+        private void ButtonFind_Click(object sender, EventArgs e)
         {
             textBoxName.Text = "";
             textBoxDesc.Text = "";
@@ -39,19 +39,17 @@ namespace WindowsFormsApp1
             textBoxDateEnd.Text = "";
             textBoxLocation.Text = "";
             textBoxPeople.Text = "";
-            textBoxPhotoId.Text = "";
             textBoxCreator.Text = "";
             pictureBox1.Image = null;
             textBoxDEBUG.Text = "";
 
-            int id;
-            Int32.TryParse(textBoxID.Text, out id);
+            Int32.TryParse(textBoxID.Text, out int id);
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1;
 
-            com1 = new SqlCommand("select * from attending where idEvent=@id and userName like '" + Program.getCurrentAccount().getName() + "'",con);
+            com1 = new SqlCommand("select * from attending where idEvent=@id and userName like '" + Program.GetCurrentAccount().GetName() + "'",con);
                 com1.Parameters.AddWithValue("id", id);
             SqlDataReader reader1 = com1.ExecuteReader();
 
@@ -60,7 +58,6 @@ namespace WindowsFormsApp1
                 con.Close();
                 con.Open();
             
-
                 com1 = new SqlCommand("select * from SportEvents where id=@id", con);
                 com1.Parameters.AddWithValue("id", id);
 
@@ -87,20 +84,14 @@ namespace WindowsFormsApp1
                             pictureBox1.Image = Image.FromStream(ms);
                         }
 
-                        textBoxCreator.Text = reader1["creator"].ToString();
-              
-                }
-       
+                        textBoxCreator.Text = reader1["creator"].ToString();         
+                }  
             }
             else
             {
                 textBoxDEBUG.Text = "You're not attending this event";
-
             }
             con.Close();
-
-
-
         }
 
         public void Clear()
@@ -113,7 +104,6 @@ namespace WindowsFormsApp1
             textBoxDateEnd.Text = "";
             textBoxLocation.Text = "";
             textBoxPeople.Text = "";
-            textBoxPhotoId.Text = "";
             textBoxCreator.Text = "";
             pictureBox1.Image = null;
             textBoxDEBUG.Text = "";
@@ -123,31 +113,25 @@ namespace WindowsFormsApp1
             listBox1.Items.Clear();
         }
 
-
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            int id;
-            Int32.TryParse(textBoxID.Text, out id);
+            Int32.TryParse(textBoxID.Text, out int id);
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
 
-            SqlCommand com1 = new SqlCommand("delete from Attending where idEvent=@id and userName like '" + Program.getCurrentAccount().getName() + "'", con);
+            SqlCommand com1 = new SqlCommand("delete from Attending where idEvent=@id and userName like '" + Program.GetCurrentAccount().GetName() + "'", con);
             SqlTransaction tx = con.BeginTransaction();
-
-
 
             try
             {
                 com1.Transaction = tx;
                 com1.Parameters.AddWithValue("id", id);
                 com1.ExecuteNonQuery();
-
                 tx.Commit();
                 Clear();
-
             }
-            catch (Exception exc)
+            catch (Exception)
             {
                 tx.Rollback();
                 textBoxDEBUG.Text = "ERROR";
@@ -159,27 +143,37 @@ namespace WindowsFormsApp1
 
         }
 
-        private void buttonRef_Click(object sender, EventArgs e)
+        private void ButtonRef_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
 
             con.Open();
             SqlCommand com1 = new SqlCommand("select idEvent from attending where userName like '"
-                + Program.getCurrentAccount().getName() + "'", con);
+                + Program.GetCurrentAccount().GetName() + "'", con);
 
             SqlDataReader reader1 = com1.ExecuteReader();
 
             listBox1.Items.Clear();
-
             while (reader1.Read())
             {
                 string id = reader1[0].ToString();
-
                 listBox1.Items.Add(id);
-
             }
-
             con.Close();
+        }
+
+        public void Updater()
+        {
+            if (Program.GetCurrentAccount() == null)
+            {
+                textBoxUsername.Text = "";
+                textBoxMoney.Text = "";
+            }
+            else
+            {
+                textBoxUsername.Text = Program.GetCurrentAccount().GetName();
+                textBoxMoney.Text = Program.GetCurrentAccount().GetMoney().ToString();
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ namespace WindowsFormsApp1
             dateTimePickerEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss";
         }
 
-
         private void Clear()
         {
             textBoxID.Text = "";
@@ -44,7 +43,7 @@ namespace WindowsFormsApp1
             listBox1.Items.Clear();
         }
 
-        private void buttonFind_Click(object sender, EventArgs e)
+        private void ButtonFind_Click(object sender, EventArgs e)
         {
             textBoxName.Text = "";
             textBoxDesc.Text = "";
@@ -52,16 +51,15 @@ namespace WindowsFormsApp1
             dateTimePickerStart.Text = DateTime.Now.ToString();
             dateTimePickerEnd.Text = DateTime.Now.ToString();
             textBoxLocation.Text = "";
-            textBoxPeople.Text = "";
             textBoxPhotoId.Text = "";
+            textBoxPeople.Text = "";
             textBoxCreator.Text = "";
             pictureBox1.Image = null;
             textBoxDEBUG.Text = "";
 
-            int id;
-            Int32.TryParse(textBoxID.Text, out id);
+            Int32.TryParse(textBoxID.Text, out int id);
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from SportEvents where id=@id", con);
             com1.Parameters.AddWithValue("id", id);
@@ -69,8 +67,8 @@ namespace WindowsFormsApp1
             SqlDataReader reader1 = com1.ExecuteReader();
             if (reader1.Read())
             {
-                if (Program.getCurrentAccount().getAdmin() ||
-                    Program.getCurrentAccount().getName().Equals(reader1["creator"].ToString()))
+                if (Program.GetCurrentAccount().GetAdmin() ||
+                    Program.GetCurrentAccount().GetName().Equals(reader1["creator"].ToString()))
                 {
                     textBoxName.Text = reader1["evName"].ToString();
                     textBoxDesc.Text = reader1["descript"].ToString();
@@ -105,12 +103,11 @@ namespace WindowsFormsApp1
             con.Close();
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            int id;
-            Int32.TryParse(textBoxID.Text, out id);
+            Int32.TryParse(textBoxID.Text, out int id);
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from SportEvents where id=@id", con);
             com1.Parameters.AddWithValue("id", id);
@@ -124,8 +121,8 @@ namespace WindowsFormsApp1
             }
             else
             {
-                if(Program.getCurrentAccount().getName().Equals(reader1["creator"].ToString()) ||
-                   Program.getCurrentAccount().getAdmin())
+                if(Program.GetCurrentAccount().GetName().Equals(reader1["creator"].ToString()) ||
+                   Program.GetCurrentAccount().GetAdmin())
                 {
                     con.Close();
                     con.Open();
@@ -133,18 +130,15 @@ namespace WindowsFormsApp1
                     SqlTransaction tx = con.BeginTransaction();
 
                     
-
                     try
                     {
                         com1.Transaction = tx;
                         com1.Parameters.AddWithValue("id", id);
                         com1.ExecuteNonQuery();
-  
                         tx.Commit();
                         Clear();
-
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
                         tx.Rollback();
                         textBoxDEBUG.Text = "ERROR";
@@ -154,7 +148,6 @@ namespace WindowsFormsApp1
                         con.Close();
                     }
 
-                    
                     
                     con.Open();
                     com1 = new SqlCommand("delete from SportEvents where id=@id", con);
@@ -163,15 +156,12 @@ namespace WindowsFormsApp1
                     try
                     {
                         com1.Transaction = tx;
-
                         com1.Parameters.AddWithValue("id", id);
                         com1.ExecuteNonQuery();
-
                         tx.Commit();
                         Clear();
-
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
                         tx.Rollback();
                         textBoxDEBUG.Text = "ERROR";
@@ -180,6 +170,7 @@ namespace WindowsFormsApp1
                     {
                         con.Close();
                     }
+
                 }
                 else
                 {
@@ -190,13 +181,13 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
 
             SqlCommand com2 = new SqlCommand("select count(*) from SportEvents where creator=@creat", con);
-            com2.Parameters.AddWithValue("creat", Program.getCurrentAccount().getName());
+            com2.Parameters.AddWithValue("creat", Program.GetCurrentAccount().GetName());
             SqlDataReader reader2 = com2.ExecuteReader();
             int nr;
 
@@ -207,7 +198,7 @@ namespace WindowsFormsApp1
 
             con.Close();
 
-            if (nr >= Program.getCurrentAccount().maxEvents())
+            if (nr >= Program.GetCurrentAccount().MaxEvents())
             {
                 textBoxDEBUG.Text = "Too many events made";
             }
@@ -225,7 +216,7 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        con = new SqlConnection(Program.getConString());
+                        con = new SqlConnection(Program.GetConString());
                         con.Open();
 
                         SqlCommand com1 = new SqlCommand("insert into SportEvents values(@nameEv,@desc,@price,@dateS,@dateE,@loc,@maxPe,@img,@creat)", con);
@@ -237,15 +228,13 @@ namespace WindowsFormsApp1
                             com1.Parameters.AddWithValue("nameEv", textBoxName.Text);
                             com1.Parameters.AddWithValue("desc", textBoxDesc.Text);
 
-                            double price;
-                            Double.TryParse(textBoxPrice.Text, out price);
+                            Double.TryParse(textBoxPrice.Text, out double price);
                             com1.Parameters.AddWithValue("price", price);
                             com1.Parameters.AddWithValue("dateS", dateTimePickerStart.Text);
                             com1.Parameters.AddWithValue("dateE", dateTimePickerEnd.Text);
                             com1.Parameters.AddWithValue("loc", textBoxLocation.Text);
 
-                            double people;
-                            Double.TryParse(textBoxPeople.Text, out people);
+                            Double.TryParse(textBoxPeople.Text, out double people);
                             com1.Parameters.AddWithValue("maxPe", people);
 
                             if (textBoxPhotoId.Text.Length < 1)
@@ -263,13 +252,13 @@ namespace WindowsFormsApp1
                                 com1.Parameters.AddWithValue("img", imageData);
                             }
 
-                            com1.Parameters.AddWithValue("creat", Program.getCurrentAccount().getName());
+                            com1.Parameters.AddWithValue("creat", Program.GetCurrentAccount().GetName());
                             Clear();         
                             com1.ExecuteNonQuery();
                             tx.Commit();
                             textBoxDEBUG.Text = "";
                         }
-                        catch (Exception exc)
+                        catch (Exception)
                         {
                             tx.Rollback();
                             textBoxDEBUG.Text = "ERROR";
@@ -280,31 +269,31 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
-                catch (Exception exc)
+                catch (Exception)
                 { }
             }
         }
 
-
-
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonImg_Click(object sender, EventArgs e)
+        private void ButtonImg_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.png";
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "Image Files|*.png"
+            };
 
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 textBoxPhotoId.Text = ofd.FileName;
                 pictureBox1.Image = Image.FromFile(ofd.FileName);
             }
         }
 
-        private void buttonModify_Click(object sender, EventArgs e)
+        private void ButtonModify_Click(object sender, EventArgs e)
         {
             try
             {
@@ -318,19 +307,18 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    SqlConnection con = new SqlConnection(Program.getConString());
+                    SqlConnection con = new SqlConnection(Program.GetConString());
 
                     con.Open();
                     SqlCommand com1 = new SqlCommand("select * from SportEvents where id=@id", con);
-                    int id;
-                    Int32.TryParse(textBoxID.Text, out id);
+                    Int32.TryParse(textBoxID.Text, out int id);
                     com1.Parameters.AddWithValue("id", id);
                     SqlDataReader reader1 = com1.ExecuteReader();
 
                     if(reader1.Read())
                     {
-                        if (Program.getCurrentAccount().getName().Equals(reader1["creator"].ToString()) ||
-                            Program.getCurrentAccount().getAdmin())
+                        if (Program.GetCurrentAccount().GetName().Equals(reader1["creator"].ToString()) ||
+                            Program.GetCurrentAccount().GetAdmin())
                         {
                             con.Close();
                             con.Open();
@@ -344,15 +332,13 @@ namespace WindowsFormsApp1
                                 com1.Transaction = tx;
                                 com1.Parameters.AddWithValue("nameEv", textBoxName.Text);
                                 com1.Parameters.AddWithValue("desc", textBoxDesc.Text);
-                                double price;
-                                Double.TryParse(textBoxPrice.Text, out price);
+                                Double.TryParse(textBoxPrice.Text, out double price);
                                 com1.Parameters.AddWithValue("price", price);               
                                 com1.Parameters.AddWithValue("dateS", dateTimePickerStart.Text);
                                 com1.Parameters.AddWithValue("dateE", dateTimePickerEnd.Text);
                                 com1.Parameters.AddWithValue("loc", textBoxLocation.Text);
 
-                                double people;
-                                Double.TryParse(textBoxPeople.Text, out people);
+                                Double.TryParse(textBoxPeople.Text, out double people);
                                 com1.Parameters.AddWithValue("maxPe", people);
 
                                 if (textBoxPhotoId.Text.Length < 1)
@@ -370,14 +356,14 @@ namespace WindowsFormsApp1
                                     com1.Parameters.AddWithValue("img", imageData);                               
                                 }
 
-                                com1.Parameters.AddWithValue("creat", Program.getCurrentAccount().getName());
+                                com1.Parameters.AddWithValue("creat", Program.GetCurrentAccount().GetName());
                                 com1.Parameters.AddWithValue("id", id);
 
                                 com1.ExecuteNonQuery();
                                 tx.Commit();
                                 textBoxDEBUG.Text = "";
                             }
-                            catch (Exception exc)
+                            catch (Exception)
                             {
                                 tx.Rollback();
                                 textBoxDEBUG.Text = "ERROR";
@@ -398,50 +384,45 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            catch (Exception exc)
+            catch (Exception)
             { }
         }
 
-        private void buttonClrImg_Click(object sender, EventArgs e)
+        private void ButtonClrImg_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
             textBoxPhotoId.Text = "";
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void ButtonBack_Click(object sender, EventArgs e)
         {
             Clear();
-            Program.getFormEventControl().Hide();
-            Program.getControlForm().Show();
+            Program.GetFormEventControl().Hide();
+            Program.GetControlForm().Show();
         }
 
-        private void buttonRef_Click(object sender, EventArgs e)
+        private void ButtonRef_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
 
             con.Open();
             SqlCommand com1 = new SqlCommand("select id from SportEvents where creator like '" 
-                + Program.getCurrentAccount().getName()  +  "'", con);
+                + Program.GetCurrentAccount().GetName()  +  "'", con);
 
             SqlDataReader reader1 = com1.ExecuteReader();
 
             listBox1.Items.Clear();
-
             while(reader1.Read())
             {
                 string id = reader1[0].ToString();
-
                 listBox1.Items.Add(id);
-
             }
-
             con.Close();
         }
 
-        private void buttonDelOld_Click(object sender, EventArgs e)
+        private void ButtonDelOld_Click(object sender, EventArgs e)
         {
-
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
 
             con.Open();
             SqlCommand com1 = new SqlCommand("select id from SportEvents where dateEnd <  GETDATE()", con);
@@ -450,11 +431,9 @@ namespace WindowsFormsApp1
 
             List<int> listId = new List<int>();
 
-            int id;
             while (reader1.Read())
             {
-                Int32.TryParse( reader1[0].ToString(), out id);
-
+                Int32.TryParse(reader1[0].ToString(), out int id);
                 listId.Add(id);
             }
 
@@ -466,8 +445,6 @@ namespace WindowsFormsApp1
                 com1 = new SqlCommand("delete from Attending where idEvent=@id", con);
                 SqlTransaction tx = con.BeginTransaction();
 
-
-
                 try
                 {
                     com1.Transaction = tx;
@@ -478,7 +455,7 @@ namespace WindowsFormsApp1
                     Clear();
 
                 }
-                catch (Exception exc)
+                catch (Exception)
                 {
                     tx.Rollback();
                     textBoxDEBUG.Text = "ERROR";
@@ -504,7 +481,7 @@ namespace WindowsFormsApp1
                     Clear();
 
                 }
-                catch (Exception exc)
+                catch (Exception)
                 {
                     tx.Rollback();
                     textBoxDEBUG.Text = "ERROR";
@@ -514,21 +491,31 @@ namespace WindowsFormsApp1
                     con.Close();
                 }
 
-
             }
-      
-
         }
 
         public void CheckAdmin()
         {
-            if (Program.getCurrentAccount().getAdmin())
+            if (Program.GetCurrentAccount().GetAdmin())
                 buttonDelOld.Show();
             else
                 buttonDelOld.Hide();
 
         }
-          
+
+        public void Updater()
+        {
+            if (Program.GetCurrentAccount() == null)
+            {
+                textBoxUsername.Text = "";
+                textBoxMoney.Text = "";
+            }
+            else
+            {
+                textBoxUsername.Text = Program.GetCurrentAccount().GetName();
+                textBoxMoney.Text = Program.GetCurrentAccount().GetMoney().ToString();
+            }
+        }
 
     }
 }

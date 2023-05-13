@@ -16,28 +16,27 @@ namespace WindowsFormsApp1
         public FormLogIn()
         {
             InitializeComponent();
-            Program.setFormMainMenu(new FormMainMenu() ) ;
-            Program.setFormEventPage(new FormEventPage());
-            Program.setSignUpForm( new FormSignUp() );
-            Program.setControlForm(new FormControls());
-            Program.setFormEventControl(new FormEventControl());
-            Program.setFormAttend(new FormAttending());
-            Program.setFormAdvertisement(new FormAdv());
+            Program.SetFormMainMenu(new FormMainMenu() ) ;
+            Program.SetFormEventPage(new FormEventPage());
+            Program.SetSignUpForm( new FormSignUp() );
+            Program.SetControlForm(new FormControls());
+            Program.SetFormEventControl(new FormEventControl());
+            Program.SetFormAttend(new FormAttending());
+            Program.SetFormAdvertisement(new FormAdv());
 
-            Program.getFormMainMenu().Hide();
-            Program.getFormEventPage().Hide();
-            Program.getSignUpForm().Hide();
-            Program.getControlForm().Hide();
-            Program.getFormEventControl().Hide();
-            Program.getFormAdvertisement().Hide();
-
+            Program.GetFormMainMenu().Hide();
+            Program.GetFormEventPage().Hide();
+            Program.GetSignUpForm().Hide();
+            Program.GetControlForm().Hide();
+            Program.GetFormEventControl().Hide();
+            Program.GetFormAdvertisement().Hide();
         }
 
-        private void buttonSignUp_Click(object sender, EventArgs e)
+        private void ButtonSignUp_Click(object sender, EventArgs e)
         {
             ClearTextBoxes();
-            Program.getSignUpForm().Show();
-            Program.getLogInForm().Hide();
+            Program.GetSignUpForm().Show();
+            Program.GetLogInForm().Hide();
         }
 
         private void ClearTextBoxes()
@@ -47,12 +46,12 @@ namespace WindowsFormsApp1
             textBoxErrorPassword.Text = "";
         }
 
-        private void buttonLogIn_Click(object sender, EventArgs e)
+        private void ButtonLogIn_Click(object sender, EventArgs e)
         {
             string pass = textBoxPass.Text;
 
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name", con);
             com1.Parameters.AddWithValue("name", textBoxUser.Text);
@@ -63,8 +62,7 @@ namespace WindowsFormsApp1
             {
                 if(textBoxPass.Text.Equals(reader1["passwrd"].ToString()))
                 {
-                    double money;
-                    Double.TryParse(reader1["wallet"].ToString(), out money);
+                    Double.TryParse(reader1["wallet"].ToString(), out double money);
 
                     bool adminStatus = false;
                     if (reader1["email"].ToString().Contains("@admin"))
@@ -85,18 +83,18 @@ namespace WindowsFormsApp1
                     Program.SetCurrentAccount(ac);
                     ClearTextBoxes();
 
-                    Program.getFormMainMenu().Updater();
-                    Program.getFormMainMenu().Show();
-                    Program.getLogInForm().Hide();
+                    Program.UpdaterAll();
+                    Program.GetFormMainMenu().Show();
+                    Program.GetLogInForm().Hide();
 
-                    Program.getFormMainMenu().Clear();
-                    Program.getFormMainMenu().ShowProducts();
+                    Program.GetFormMainMenu().Clear();
+                    Program.GetFormMainMenu().ShowProducts();
 
-                    Program.getControlForm().CheckAdmin();
-                    Program.getControlForm().PremiumCheck();
-                    Program.getFormMainMenu().PremiumCheck();
+                    Program.GetControlForm().CheckAdmin();
+                    Program.GetControlForm().PremiumCheck();
+                    Program.GetFormMainMenu().PremiumCheck();
 
-                    Program.getFormEventControl().CheckAdmin();
+                    Program.GetFormEventControl().CheckAdmin();
 
                 }
                 else
@@ -111,7 +109,7 @@ namespace WindowsFormsApp1
             con.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
             Close();

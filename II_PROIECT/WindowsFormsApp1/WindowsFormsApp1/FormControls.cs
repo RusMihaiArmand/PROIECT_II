@@ -16,63 +16,47 @@ namespace WindowsFormsApp1
         public FormControls()
         {
             InitializeComponent();
-
-            /*
-            if (Program.getCurrentAccount() == null || Program.getCurrentAccount().getAdmin() == false)
-                button5.Hide();
-            else
-                button5.Show();
-
-
-            if (Program.getCurrentAccount() == null || Program.getCurrentAccount().getPremium() == true)
-                button4.Hide();
-            else
-                button4.Show();
-                */
-
         }
 
         public void PremiumCheck()
         {
-            if (Program.getCurrentAccount().getPremium() || Program.getCurrentAccount().getAdmin())
+            if (Program.GetCurrentAccount().GetPremium() || Program.GetCurrentAccount().GetAdmin())
                 buttonPremium.Hide();
             else
                 buttonPremium.Show();
-
         }
 
         public void CheckAdmin()
         {
-            if (!Program.getCurrentAccount().getAdmin())
+            if (!Program.GetCurrentAccount().GetAdmin())
                 buttonAdv.Hide();
             else
                 buttonAdv.Show();
-
         }
 
-        private void buttonSignOut_Click(object sender, EventArgs e)
+        private void ButtonSignOut_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
             Program.SetCurrentAccount(null);
-            Program.getControlForm().Hide();
+            Program.GetControlForm().Hide();
 
-            Program.getLogInForm().Show();
+            Program.GetLogInForm().Show();
 
+            Program.UpdaterAll();
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonAddFunds_Click(object sender, EventArgs e)
+        private void ButtonAddFunds_Click(object sender, EventArgs e)
         {
-            if (Program.getCurrentAccount() == null)
+            if (Program.GetCurrentAccount() == null)
                 MessageBox.Show("You have to log in first", "Message");
             else
             {
-                int s;
-                Int32.TryParse(textBoxFunds.Text, out s);
+                Int32.TryParse(textBoxFunds.Text, out int s);
 
                 if (s < 0)
                     s = 0;
@@ -80,30 +64,26 @@ namespace WindowsFormsApp1
                 textBoxFunds.Text = "";
 
                 if(s>0)
-                {
-                    
-                    Program.getCurrentAccount().addMoney(s);
-                    Program.getFormMainMenu().Updater();
-
+                {        
+                    Program.GetCurrentAccount().AddMoney(s);
+                    Program.UpdaterAll();
                 }
-
             }
         }
 
-        private void buttonPremium_Click(object sender, EventArgs e)
+        private void ButtonPremium_Click(object sender, EventArgs e)
         {
-            if (Program.getCurrentAccount() != null)
+            if (Program.GetCurrentAccount() != null)
             {
-
-                if (Program.getCurrentAccount().getMoney() >= 50
-                      && Program.getCurrentAccount().getPremium() == false)
+                if (Program.GetCurrentAccount().GetMoney() >= 50
+                      && Program.GetCurrentAccount().GetPremium() == false)
                 {
-                    Program.getCurrentAccount().addMoney(-50);
-                    Program.getCurrentAccount().setPremium(true);
+                    Program.GetCurrentAccount().AddMoney(-50);
+                    Program.GetCurrentAccount().SetPremium(true);
 
                     buttonPremium.Hide();
 
-                    SqlConnection con = new SqlConnection(Program.getConString());
+                    SqlConnection con = new SqlConnection(Program.GetConString());
                     con.Open();
                     SqlTransaction tx = con.BeginTransaction();
 
@@ -115,16 +95,16 @@ namespace WindowsFormsApp1
                         string prDate = DateTime.Now.AddDays(30).ToString();
 
                         com1.Parameters.AddWithValue("date", prDate);
-                        com1.Parameters.AddWithValue("name", Program.getCurrentAccount().getName());
+                        com1.Parameters.AddWithValue("name", Program.GetCurrentAccount().GetName());
 
 
                         com1.ExecuteNonQuery();
                         tx.Commit();
 
-                        Program.getSignUpForm().Hide();
-                        Program.getLogInForm().Show();
+                        Program.GetSignUpForm().Hide();
+                        Program.GetLogInForm().Show();
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
                         tx.Rollback();
                         MessageBox.Show("Error; contact admins for help", "Message");
@@ -133,75 +113,62 @@ namespace WindowsFormsApp1
                     {
                         con.Close();
                         PremiumCheck();
-                        Program.getFormMainMenu().PremiumCheck();
+                        Program.GetFormMainMenu().PremiumCheck();
                     }
-
-
                 }
                 else
                     MessageBox.Show("Can't buy premium", "Message");
-                
-
             }
         }
 
-        private void buttonEventAdder_Click(object sender, EventArgs e)
+        private void ButtonEventAdder_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
-            Program.getControlForm().Hide();
-            Program.getFormEventControl().Show();
+            Program.GetControlForm().Hide();
+            Program.GetFormEventControl().Show();
         }
 
-        private void Form5_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void ButtonBack_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
-            Program.getControlForm().Hide();
-            Program.getFormMainMenu().Show();
+            Program.GetControlForm().Hide();
+            Program.GetFormMainMenu().Show();
         }
 
-        private void buttonAtt_Click(object sender, EventArgs e)
+        private void ButtonAtt_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
-            Program.getFormAttend().Show();
-            Program.getFormAttend().Clear();
-            Program.getControlForm().Hide();
+            Program.GetFormAttend().Show();
+            Program.GetFormAttend().Clear();
+            Program.GetControlForm().Hide();
         }
 
-        private void buttonAccountDelete_Click(object sender, EventArgs e)
+        private void ButtonAccountDelete_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
 
             DialogResult dialogResult = MessageBox.Show("Are you sure?", "WARNING", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if(Program.getCurrentAccount().getAdmin())
+                if(Program.GetCurrentAccount().GetAdmin())
                 {
                     MessageBox.Show("Can't delete admin accounts like that", "No");
                 }
                 else
                 {
-
-
-                    SqlConnection con = new SqlConnection(Program.getConString());
+                    SqlConnection con = new SqlConnection(Program.GetConString());
 
                     con.Open();
                     SqlCommand com1 = new SqlCommand("select id from SportEvents where creator like '"
-                            + Program.getCurrentAccount().getName() + "'", con);
+                            + Program.GetCurrentAccount().GetName() + "'", con);
 
                     SqlDataReader reader1 = com1.ExecuteReader();
 
                     List<int> listId = new List<int>();
 
-                    int id;
                     while (reader1.Read())
                     {
-                        Int32.TryParse(reader1[0].ToString(), out id);
-
+                        Int32.TryParse(reader1[0].ToString(), out int id);
                         listId.Add(id);
                     }
 
@@ -213,18 +180,14 @@ namespace WindowsFormsApp1
                         com1 = new SqlCommand("delete from Attending where idEvent=@id", con);
                         SqlTransaction tx = con.BeginTransaction();
 
-
-
                         try
                         {
                             com1.Transaction = tx;
                             com1.Parameters.AddWithValue("id", ide);
                             com1.ExecuteNonQuery();
-
                             tx.Commit();
-
                         }
-                        catch (Exception exc)
+                        catch (Exception)
                         {
                             tx.Rollback();
                         }
@@ -241,14 +204,11 @@ namespace WindowsFormsApp1
                         try
                         {
                             com1.Transaction = tx;
-
                             com1.Parameters.AddWithValue("id", ide);
                             com1.ExecuteNonQuery();
-
                             tx.Commit();
-
                         }
-                        catch (Exception exc)
+                        catch (Exception)
                         {
                             tx.Rollback();
                         }
@@ -257,53 +217,42 @@ namespace WindowsFormsApp1
                             con.Close();
                         }
 
-
                     }
-
 
 
                     con.Open();
                     com1 = new SqlCommand("delete from attending where userName like '"
-                            + Program.getCurrentAccount().getName() + "'", con);
+                            + Program.GetCurrentAccount().GetName() + "'", con);
 
                     SqlTransaction tx2 = con.BeginTransaction();
-
                     try
                     {
                         com1.Transaction = tx2;
                         com1.ExecuteNonQuery();
-
                         tx2.Commit();
-
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
-                        tx2.Rollback();
-                        
+                        tx2.Rollback();      
                     }
                     finally
                     {
                         con.Close();
-
-
                     }
 
 
                     con.Open();
                     com1 = new SqlCommand("delete from utilizator where username like '"
-                            + Program.getCurrentAccount().getName() + "'", con);
+                            + Program.GetCurrentAccount().GetName() + "'", con);
 
                     tx2 = con.BeginTransaction();
-
                     try
                     {
                         com1.Transaction = tx2;
                         com1.ExecuteNonQuery();
-
                         tx2.Commit();
-
                     }
-                    catch (Exception exc)
+                    catch (Exception)
                     {
                         tx2.Rollback();
                         MessageBox.Show("Something went wrong", "ERROR");
@@ -311,23 +260,35 @@ namespace WindowsFormsApp1
                     finally
                     {
                         con.Close();
-
                         Program.SetCurrentAccount(null);
-                        Program.getLogInForm().Show();
-                        Program.getControlForm().Hide();
-
+                        Program.GetLogInForm().Show();
+                        Program.GetControlForm().Hide();
                     }
-
-
                 }
             }
+
+            Program.UpdaterAll();
         }
 
-        private void buttonAdv_Click(object sender, EventArgs e)
+        private void ButtonAdv_Click(object sender, EventArgs e)
         {
             textBoxFunds.Text = "";
-            Program.getControlForm().Hide();
-            Program.getFormAdvertisement().Show();
+            Program.GetControlForm().Hide();
+            Program.GetFormAdvertisement().Show();
+        }
+
+        public void Updater()
+        {
+            if (Program.GetCurrentAccount() == null)
+            {
+                textBoxUsername.Text = "";
+                textBoxMoney.Text = "";
+            }
+            else
+            {
+                textBoxUsername.Text = Program.GetCurrentAccount().GetName();
+                textBoxMoney.Text = Program.GetCurrentAccount().GetMoney().ToString();
+            }
         }
     }
 }

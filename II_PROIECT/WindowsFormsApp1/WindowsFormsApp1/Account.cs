@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
             
         }
 
-        public int maxEvents()
+        public int MaxEvents()
         {
             if (this.isAdmin)
                 return 999;
@@ -48,18 +48,18 @@ namespace WindowsFormsApp1
         }
         
 
-        public double getMoney()
+        public double GetMoney()
         {
             return this.money;
         }
-        public void setMoney(double n)
+        public void SetMoney(double n)
         {
             this.money = n;
         }
-        public void addMoney(double n)
+        public void AddMoney(double n)
         {
 
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
 
 
@@ -77,7 +77,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Money added", "Message");
 
             }
-            catch (Exception exc)
+            catch (Exception)
             {
                 tx.Rollback();
                 MessageBox.Show("Error; no money added", "Message");
@@ -86,66 +86,61 @@ namespace WindowsFormsApp1
             {
                 con.Close();
             }
-
-            
-
-            //SqlDataReader reader1 = com1.ExecuteReader();
-            
         }
 
 
-        public string getName()
+        public string GetName()
         {
             return this.name;
         }
-        public void setName(string n)
+        public void SetName(string n)
         {
             this.name = n;
         }
 
 
-        public string getPass()
+        public string GetPass()
         {
             return this.pass;
         }
-        public void setPass(string n)
+        public void SetPass(string n)
         {
             this.pass = n;
         }
 
-        public string getEmail()
+        public string GetEmail()
         {
             return this.email;
         }
-        public void setEmail(string n)
+        public void SetEmail(string n)
         {
             this.email = n;
         }
 
-        public bool getAdmin()
+        public bool GetAdmin()
         {
             return this.isAdmin;
         }
-        public void setAdmin(bool p)
+        public void SetAdmin(bool p)
         {
             this.isAdmin = p;
         }
 
         
-        public bool getPremium()
+        public bool GetPremium()
         {
             return this.hasPremium;
         }
-        public void setPremium(bool p)
+        public void SetPremium(bool p)
         {
             this.hasPremium = p;
         }
 
-        public DateTime getPremiumTime()
+        public DateTime GetPremiumTime()
         {
             return this.premiumUntil;
         }
-        public void setPremiumTime(DateTime p)
+        public void SetPremiumTime(DateTime p)
         {
             this.premiumUntil = p;
         }

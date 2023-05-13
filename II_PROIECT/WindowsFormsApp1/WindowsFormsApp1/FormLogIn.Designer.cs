@@ -34,7 +34,7 @@
             this.textBoxUser = new System.Windows.Forms.TextBox();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.textBoxErrorPassword = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -56,7 +56,7 @@
             this.buttonLogIn.TabIndex = 0;
             this.buttonLogIn.Text = "LOG IN";
             this.buttonLogIn.UseVisualStyleBackColor = false;
-            this.buttonLogIn.Click += new System.EventHandler(this.buttonLogIn_Click);
+            this.buttonLogIn.Click += new System.EventHandler(this.ButtonLogIn_Click);
             // 
             // buttonSignUp
             // 
@@ -68,7 +68,7 @@
             this.buttonSignUp.TabIndex = 1;
             this.buttonSignUp.Text = "SIGN UP";
             this.buttonSignUp.UseVisualStyleBackColor = false;
-            this.buttonSignUp.Click += new System.EventHandler(this.buttonSignUp_Click);
+            this.buttonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // label1
             // 
@@ -87,6 +87,7 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(176, 22);
             this.textBoxUser.TabIndex = 4;
+            this.textBoxUser.Text = "admin";
             // 
             // textBoxPass
             // 
@@ -95,6 +96,7 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(176, 22);
             this.textBoxPass.TabIndex = 5;
+            this.textBoxPass.Text = "1234";
             // 
             // textBoxErrorPassword
             // 
@@ -104,17 +106,17 @@
             this.textBoxErrorPassword.Size = new System.Drawing.Size(176, 22);
             this.textBoxErrorPassword.TabIndex = 6;
             // 
-            // button3
+            // buttonExit
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.button3.Location = new System.Drawing.Point(538, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(42, 34);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "X";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonExit.BackColor = System.Drawing.Color.White;
+            this.buttonExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.buttonExit.Location = new System.Drawing.Point(538, 12);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(42, 34);
+            this.buttonExit.TabIndex = 7;
+            this.buttonExit.Text = "X";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
             // panel1
             // 
@@ -157,7 +159,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.textBoxUser);
             this.panel2.Controls.Add(this.buttonSignUp);
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.buttonExit);
             this.panel2.Controls.Add(this.textBoxErrorPassword);
             this.panel2.Controls.Add(this.buttonLogIn);
             this.panel2.Controls.Add(this.textBoxPass);
@@ -218,7 +220,7 @@
         private System.Windows.Forms.TextBox textBoxUser;
         private System.Windows.Forms.TextBox textBoxPass;
         private System.Windows.Forms.TextBox textBoxErrorPassword;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;

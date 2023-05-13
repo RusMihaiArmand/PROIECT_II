@@ -73,7 +73,7 @@
             this.buttonCreateAccount.TabIndex = 4;
             this.buttonCreateAccount.Text = "CREATE ACCOUNT";
             this.buttonCreateAccount.UseVisualStyleBackColor = false;
-            this.buttonCreateAccount.Click += new System.EventHandler(this.buttonCreateAccount_Click);
+            this.buttonCreateAccount.Click += new System.EventHandler(this.ButtonCreateAccount_Click);
             // 
             // textBoxError
             // 
@@ -93,7 +93,7 @@
             this.buttonExit.TabIndex = 6;
             this.buttonExit.Text = "X";
             this.buttonExit.UseVisualStyleBackColor = false;
-            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
             // panel1
             // 
@@ -160,7 +160,7 @@
             this.buttonBack.TabIndex = 15;
             this.buttonBack.Text = "<---";
             this.buttonBack.UseVisualStyleBackColor = false;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            this.buttonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // label5
             // 

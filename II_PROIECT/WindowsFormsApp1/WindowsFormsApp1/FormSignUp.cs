@@ -18,9 +18,9 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void buttonCreateAccount_Click(object sender, EventArgs e)
+        private void ButtonCreateAccount_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from utilizator where username=@name or email=@mail", con);
             com1.Parameters.AddWithValue("name", textBoxUser.Text);
@@ -66,10 +66,12 @@ namespace WindowsFormsApp1
                                     }
 
                                     int arPos = -1;
+
+                                    string specialCh = "!#$%&'*+-/=?^_`{|}~";
                                     for (int i = 1; i < mail.Length - 1; i++)
                                     {
-                                        if (!Char.IsLetterOrDigit(mail[i]) && mail[i] != '.' && mail[i] != '@'
-                                                && mail[i] != '-' && mail[i] != '_')
+                                        if (!Char.IsLetterOrDigit(mail[i])  && mail[i] != '@'
+                                                && !specialCh.Contains(mail[i]))
                                         {
                                             problem = true;
                                         }
@@ -111,7 +113,7 @@ namespace WindowsFormsApp1
                                     textBoxError.Text = "invalid mail";
                                 else
                                 {
-                                    con = new SqlConnection(Program.getConString());
+                                    con = new SqlConnection(Program.GetConString());
                                     con.Open();
 
                                     SqlTransaction tx = con.BeginTransaction();
@@ -127,15 +129,13 @@ namespace WindowsFormsApp1
                                         com2.Parameters.AddWithValue("pass", textBoxPass.Text);
                                         com2.Parameters.AddWithValue("email", textBoxMail.Text);
 
-                                        //reader1 = com2.ExecuteReader();
-
                                         com2.ExecuteNonQuery();
                                         tx.Commit();
                                         ClearText();
-                                        Program.getSignUpForm().Hide();
-                                        Program.getLogInForm().Show();
+                                        Program.GetSignUpForm().Hide();
+                                        Program.GetLogInForm().Show();
                                     }
-                                    catch(Exception exc)
+                                    catch(Exception)
                                     {
                                         tx.Rollback();
                                         textBoxError.Text = "ERROR";
@@ -170,7 +170,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
             Close();
@@ -184,11 +184,11 @@ namespace WindowsFormsApp1
             textBoxMail.Text = "";
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        private void ButtonBack_Click(object sender, EventArgs e)
         {
             ClearText();
-            Program.getLogInForm().Show();
-            Program.getSignUpForm().Hide();
+            Program.GetLogInForm().Show();
+            Program.GetSignUpForm().Hide();
         }
     }
 }

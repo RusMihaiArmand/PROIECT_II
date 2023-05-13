@@ -96,12 +96,6 @@
     <Compile Include="FormEventControl.Designer.cs">
       <DependentUpon>FormEventControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormTesting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormTesting.Designer.cs">
-      <DependentUpon>FormTesting.cs</DependentUpon>
-    </Compile>
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,9 +122,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEventControl.resx">
       <DependentUpon>FormEventControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormTesting.resx">
-      <DependentUpon>FormTesting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -159,17 +150,10 @@
     <None Include="bin\Debug\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\049.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="bin\Debug\logo.png" />
+    <None Include="Resources\logo smol.png" />
     <None Include="Resources\logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\logo.png" />
-    <None Include="Resources\logo2.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

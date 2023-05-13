@@ -25,92 +25,87 @@ namespace WindowsFormsApp1
         //private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Integrated Security=True";
 
         //SQLstuff
-        private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Persist Security Info=True;User ID=SQLstuff; Password=SQLstuff";
+        private static readonly string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Persist Security Info=True;User ID=SQLstuff; Password=SQLstuff";
 
 
         private static Account current_account = null;
 
-        public static string getConString()
+        public static string GetConString()
         {
             return connectionString;
         }
 
 
-        public static void setFormMainMenu(FormMainMenu f)
+        public static void SetFormMainMenu(FormMainMenu f)
         {
             Program.fMainMenu = f;
         }
-        public static FormMainMenu getFormMainMenu()
+        public static FormMainMenu GetFormMainMenu()
         {
             return Program.fMainMenu;
         }
 
-        public static void setFormEventPage(FormEventPage f)
+        public static void SetFormEventPage(FormEventPage f)
         {
             Program.fEventPage = f;
         }
-        public static FormEventPage getFormEventPage()
+        public static FormEventPage GetFormEventPage()
         {
             return Program.fEventPage;
         }
 
-
-        public static FormLogIn getLogInForm()
+        public static FormLogIn GetLogInForm()
         {
             return Program.fLogIn;
         }
 
-
-        public static void setSignUpForm(FormSignUp f)
+        public static void SetSignUpForm(FormSignUp f)
         {
             Program.fSignUp = f;
         }
-        public static FormSignUp getSignUpForm()
+        public static FormSignUp GetSignUpForm()
         {
             return Program.fSignUp;
         }
 
 
-        public static void setControlForm(FormControls f)
+        public static void SetControlForm(FormControls f)
         {
             Program.fControls = f;
         }
-        public static FormControls getControlForm()
+        public static FormControls GetControlForm()
         {
             return Program.fControls;
         }
 
-        public static void setFormEventControl(FormEventControl f)
+        public static void SetFormEventControl(FormEventControl f)
         {
             Program.fEventControl = f;
         }
-        public static FormEventControl getFormEventControl()
+        public static FormEventControl GetFormEventControl()
         {
             return Program.fEventControl;
         }
 
-        public static void setFormAttend(FormAttending f)
+        public static void SetFormAttend(FormAttending f)
         {
             Program.fAttend = f;
         }
-        public static FormAttending getFormAttend()
+        public static FormAttending GetFormAttend()
         {
             return Program.fAttend;
         }
 
-
-        public static void setFormAdvertisement(FormAdv f)
+        public static void SetFormAdvertisement(FormAdv f)
         {
             Program.fAdv = f;
         }
-        public static FormAdv getFormAdvertisement()
+        public static FormAdv GetFormAdvertisement()
         {
             return Program.fAdv;
         }
 
-
-
-        public static Account getCurrentAccount()
+        public static Account GetCurrentAccount()
         {
             return current_account;
         }
@@ -119,18 +114,23 @@ namespace WindowsFormsApp1
             current_account = a;
         }
 
-        
+        public static void UpdaterAll()
+        {
+            fAdv.Updater();
+            fAttend.Updater();
+            fControls.Updater();
+            fEventControl.Updater();
+            fEventPage.Updater();
+            fMainMenu.Updater();
+
+        }
 
         [STAThread]
         static void Main()
         {
-
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(fLogIn=new FormLogIn());
-           
-
         }
     }
 }

@@ -47,7 +47,6 @@ namespace WindowsFormsApp1
             if (img == null)
             {
                 pictureBox1.Image = null;
-               // pictureBox1.Load("logo.png");
             }
             else
             {
@@ -56,35 +55,27 @@ namespace WindowsFormsApp1
             }
 
             textBoxCreator.Text = cr;
-
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonExit_Click(object sender, EventArgs e)
+        private void ButtonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonAttend_Click(object sender, EventArgs e)
+        private void ButtonAttend_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Program.getConString());
+            SqlConnection con = new SqlConnection(Program.GetConString());
             con.Open();
             SqlCommand com1 = new SqlCommand("select * from Attending where idEvent=@id and userName like '" +
-                Program.getCurrentAccount().getName() + "'", con);
+                Program.GetCurrentAccount().GetName() + "'", con);
 
-            int id;
-            Int32.TryParse(textBoxId.Text, out id);
+            Int32.TryParse(textBoxId.Text, out int id);
             com1.Parameters.AddWithValue("id", id);
 
             SqlDataReader reader1 = com1.ExecuteReader();
 
-            int totalP, freeP;
-            Int32.TryParse(textBoxTotalPlaces.Text, out totalP);
-            Int32.TryParse(textBoxAvailablePlaces.Text, out freeP);
+            Int32.TryParse(textBoxTotalPlaces.Text, out int totalP);
+            Int32.TryParse(textBoxAvailablePlaces.Text, out int freeP);
 
             if (freeP == 0 && totalP > 0)
             {
@@ -93,115 +84,115 @@ namespace WindowsFormsApp1
             else
             {
                 if (reader1.Read())
-            {
-                MessageBox.Show("You're already attending", "Message");
-                con.Close();
-            }
-                else
-            {
-                con.Close();
-
-                if (Program.getCurrentAccount().getName().Equals(textBoxCreator.Text))
                 {
-                    MessageBox.Show("This is your event", "Message");
+                    MessageBox.Show("You're already attending", "Message");
+                    con.Close();
                 }
                 else
                 {
-                    double price;
-                    Double.TryParse(textBoxPrice.Text, out price);
+                    con.Close();
 
-                    if (Program.getCurrentAccount().getMoney() < price)
+                    if (Program.GetCurrentAccount().GetName().Equals(textBoxCreator.Text))
                     {
-                        MessageBox.Show("Not enough money", "Message");
+                        MessageBox.Show("This is your event", "Message");
                     }
                     else
                     {
+                        Double.TryParse(textBoxPrice.Text, out double price);
 
-
-                        con = new SqlConnection(Program.getConString());
-                        con.Open();
-
-                        SqlTransaction tx = con.BeginTransaction();
-
-                        com1 = new SqlCommand("insert into Attending values(@id,@ut)", con);
-
-
-                        SqlCommand com2 = new SqlCommand("update utilizator set wallet=@mon where username like '" +
-                            Program.getCurrentAccount().getName() + "'", con);
-
-
-                        try
+                        if (Program.GetCurrentAccount().GetMoney() < price)
                         {
-                            com1.Transaction = tx;
-
-                            com1.Parameters.AddWithValue("id", textBoxId.Text);
-                            com1.Parameters.AddWithValue("ut", Program.getCurrentAccount().getName());
-
-
-                            com1.ExecuteNonQuery();
-
-                            tx.Commit();
+                            MessageBox.Show("Not enough money", "Message");
                         }
-                        catch (Exception exc)
+                        else
                         {
-                            tx.Rollback();
+                            con = new SqlConnection(Program.GetConString());
+                            con.Open();
 
-                            MessageBox.Show("ERROR", "Message");
+                            SqlTransaction tx = con.BeginTransaction();
+                            com1 = new SqlCommand("insert into Attending values(@id,@ut)", con);
+
+                            SqlCommand com2 = new SqlCommand("update utilizator set wallet=@mon where username like '" +
+                                Program.GetCurrentAccount().GetName() + "'", con);
+
+
+                            try
+                            {
+                                com1.Transaction = tx;
+
+                                com1.Parameters.AddWithValue("id", textBoxId.Text);
+                                com1.Parameters.AddWithValue("ut", Program.GetCurrentAccount().GetName());
+
+                                com1.ExecuteNonQuery();
+
+                                tx.Commit();
+                            }
+                            catch (Exception)
+                            {
+                                tx.Rollback();
+                                MessageBox.Show("ERROR", "Message");
+                            }
+                            finally
+                            {
+                                con.Close();
+                            }
+
+
+                            con.Open();
+                            tx = con.BeginTransaction();
+
+                            try
+                            {
+                                com2.Transaction = tx;
+                                double newM = Program.GetCurrentAccount().GetMoney() - price;
+                                com2.Parameters.AddWithValue("mon", newM);
+                                com2.Parameters.AddWithValue("us", Program.GetCurrentAccount().GetName());
+
+
+                                com2.ExecuteNonQuery();
+                                tx.Commit();
+
+                                Program.GetFormEventPage().Hide();
+                                Program.GetFormMainMenu().Show();
+
+                                Program.GetCurrentAccount().SetMoney(newM);
+                                Program.UpdaterAll();
+                            }
+                            catch (Exception)
+                            {
+                                tx.Rollback();
+                                MessageBox.Show("ERROR", "Message");
+                            }
+                            finally
+                            {
+                                con.Close();
+                            }
+
                         }
-                        finally
-                        {
-                            con.Close();
-                        }
-
-
-
-
-                        con.Open();
-                        tx = con.BeginTransaction();
-
-                        try
-                        {
-                            com2.Transaction = tx;
-                            double newM = Program.getCurrentAccount().getMoney() - price;
-                            com2.Parameters.AddWithValue("mon", newM);
-                            com2.Parameters.AddWithValue("us", Program.getCurrentAccount().getName());
-
-
-                            com2.ExecuteNonQuery();
-
-                            tx.Commit();
-
-                            Program.getFormEventPage().Hide();
-                            Program.getFormMainMenu().Show();
-
-                            Program.getCurrentAccount().setMoney(newM);
-                            Program.getFormMainMenu().Updater();
-
-                        }
-                        catch (Exception exc)
-                        {
-                            tx.Rollback();
-
-                            MessageBox.Show("ERROR", "Message");
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-
-
                     }
-
                 }
             }
+        }
 
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            Program.GetFormEventPage().Hide();
+            Program.GetFormMainMenu().Show();
+        }
+
+        public void Updater()
+        {
+            if (Program.GetCurrentAccount() == null)
+            {
+                textBoxUsername.Text = "";
+                textBoxMoney.Text = "";
+            }
+            else
+            {
+                textBoxUsername.Text = Program.GetCurrentAccount().GetName();
+                textBoxMoney.Text = Program.GetCurrentAccount().GetMoney().ToString();
             }
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
-        {
-            Program.getFormEventPage().Hide();
-            Program.getFormMainMenu().Show();
-        }
     }
 }
