@@ -19,14 +19,14 @@ namespace WindowsFormsApp1
         private static FormAttending fAttend;
         private static FormAdv fAdv;
 
-        // private static string connectionString = "Data Source=.;Initial Catalog=STUD;Integrated Security=True";
-        // DESKTOP-A5P03KC
 
-        //private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Integrated Security=True";
+        //cS - Mihai
+        private static readonly string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Persist Security Info=True;User ID=SQLstuff; Password=SQLstuff";
 
-        //SQLstuff
-        private static readonly string connectionString = "Data Source=DESKTOP-EJKPAGS\\MYSQL;Initial Catalog = STUD; Integrated Security = True";
+        //cS - Teo
+        //private static readonly string connectionString = "Data Source=DESKTOP-EJKPAGS\\MYSQL;Initial Catalog = STUD; Integrated Security = True";
 
+        //a se selecta/pune connectionString-ul bun inainte de rulare; Semnat, M
 
         private static Account current_account = null;
 

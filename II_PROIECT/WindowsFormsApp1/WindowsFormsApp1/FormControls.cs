@@ -87,22 +87,19 @@ namespace WindowsFormsApp1
                     con.Open();
                     SqlTransaction tx = con.BeginTransaction();
 
-                    SqlCommand com1 = new SqlCommand("update utilizator set premiumUntil=@date where username=@name", con);
-
+                    SqlCommand com1 = new SqlCommand("update utilizator set premiumUntil=@date where username like '" +
+                       Program.GetCurrentAccount().GetName() + "'", con);
 
                     try
                     {
+                        com1.Transaction = tx;
                         string prDate = DateTime.Now.AddDays(30).ToString();
 
-                        com1.Parameters.AddWithValue("date", prDate);
-                        com1.Parameters.AddWithValue("name", Program.GetCurrentAccount().GetName());
-
+                        com1.Parameters.AddWithValue("date", DateTime.Now.AddDays(30));
 
                         com1.ExecuteNonQuery();
                         tx.Commit();
 
-                        Program.GetSignUpForm().Hide();
-                        Program.GetLogInForm().Show();
                     }
                     catch (Exception)
                     {

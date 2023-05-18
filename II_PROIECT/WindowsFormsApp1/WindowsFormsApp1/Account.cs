@@ -74,17 +74,17 @@ namespace WindowsFormsApp1
                 com1.ExecuteNonQuery();
                 tx.Commit();
                 this.money = this.money + n;
-                MessageBox.Show("Money added", "Message");
-
+                MessageBox.Show("Transaction successful", "Message");
             }
             catch (Exception)
             {
                 tx.Rollback();
-                MessageBox.Show("Error; no money added", "Message");
+                MessageBox.Show("Error", "Message");
             }
             finally
             {
                 con.Close();
+                Program.UpdaterAll();
             }
         }
 
