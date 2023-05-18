@@ -30,3 +30,21 @@ D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventPage.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAttending.resources
 D:\II LAB\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAdv.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAdv.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormAttending.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormMainMenu.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventPage.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormLogIn.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormSignUp.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormControls.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.FormEventControl.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+D:\AUTCN\AN III\SEM II\II\Proiect bun\PROIECT_II-main\II_PROIECT\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

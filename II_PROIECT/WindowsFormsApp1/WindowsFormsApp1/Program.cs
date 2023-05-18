@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
         //private static string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Integrated Security=True";
 
         //SQLstuff
-        private static readonly string connectionString = "Data Source=DESKTOP-A5P03KC;Initial Catalog=STUD;Persist Security Info=True;User ID=SQLstuff; Password=SQLstuff";
+        private static readonly string connectionString = "Data Source=DESKTOP-EJKPAGS\\MYSQL;Initial Catalog = STUD; Integrated Security = True";
 
 
         private static Account current_account = null;

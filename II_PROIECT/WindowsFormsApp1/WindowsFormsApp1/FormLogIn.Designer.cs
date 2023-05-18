@@ -50,13 +50,14 @@
             // 
             this.buttonLogIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
             this.buttonLogIn.ForeColor = System.Drawing.Color.White;
-            this.buttonLogIn.Location = new System.Drawing.Point(125, 361);
+            this.buttonLogIn.Location = new System.Drawing.Point(130, 361);
             this.buttonLogIn.Name = "buttonLogIn";
             this.buttonLogIn.Size = new System.Drawing.Size(177, 46);
             this.buttonLogIn.TabIndex = 0;
             this.buttonLogIn.Text = "LOG IN";
             this.buttonLogIn.UseVisualStyleBackColor = false;
             this.buttonLogIn.Click += new System.EventHandler(this.ButtonLogIn_Click);
+            this.buttonLogIn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.buttonClickEnter);
             // 
             // buttonSignUp
             // 
@@ -87,7 +88,6 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(176, 22);
             this.textBoxUser.TabIndex = 4;
-            this.textBoxUser.Text = "admin";
             // 
             // textBoxPass
             // 
@@ -96,7 +96,6 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(176, 22);
             this.textBoxPass.TabIndex = 5;
-            this.textBoxPass.Text = "1234";
             // 
             // textBoxErrorPassword
             // 
@@ -137,7 +136,7 @@
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label3.Location = new System.Drawing.Point(123, 269);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(216, 81);
+            this.label3.Size = new System.Drawing.Size(213, 78);
             this.label3.TabIndex = 1;
             this.label3.Text = "                  Take your\r\n   interest in sports to\r\n            the next level" +
     "";

@@ -16,9 +16,9 @@ namespace WindowsFormsApp1
         public FormLogIn()
         {
             InitializeComponent();
-            Program.SetFormMainMenu(new FormMainMenu() ) ;
+            Program.SetFormMainMenu(new FormMainMenu());
             Program.SetFormEventPage(new FormEventPage());
-            Program.SetSignUpForm( new FormSignUp() );
+            Program.SetSignUpForm(new FormSignUp());
             Program.SetControlForm(new FormControls());
             Program.SetFormEventControl(new FormEventControl());
             Program.SetFormAttend(new FormAttending());
@@ -30,6 +30,9 @@ namespace WindowsFormsApp1
             Program.GetControlForm().Hide();
             Program.GetFormEventControl().Hide();
             Program.GetFormAdvertisement().Hide();
+
+            this.KeyPreview = true;
+            this.KeyDown += buttonClickEnter;
         }
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
@@ -60,7 +63,7 @@ namespace WindowsFormsApp1
 
             if (reader1.Read())
             {
-                if(textBoxPass.Text.Equals(reader1["passwrd"].ToString()))
+                if (textBoxPass.Text.Equals(reader1["passwrd"].ToString()))
                 {
                     Double.TryParse(reader1["wallet"].ToString(), out double money);
 
@@ -70,7 +73,7 @@ namespace WindowsFormsApp1
 
                     bool premiumStatus = false;
 
-                    if( DateTime.Now < DateTime.Parse(reader1["premiumUntil"].ToString()) || adminStatus)
+                    if (DateTime.Now < DateTime.Parse(reader1["premiumUntil"].ToString()) || adminStatus)
                         premiumStatus = true;
 
                     DateTime time = DateTime.Parse(reader1["premiumUntil"].ToString());
@@ -100,7 +103,7 @@ namespace WindowsFormsApp1
                 else
                 {
                     textBoxErrorPassword.Text = "Wrong password";
-                }      
+                }
             }
             else
             {
@@ -115,6 +118,12 @@ namespace WindowsFormsApp1
             Close();
         }
 
-      
+        private void buttonClickEnter(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                ButtonLogIn_Click(sender, e);
+            }
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
 
                                     int arPos = -1;
 
-                                    string specialCh = "!#$%&'*+-/=?^_`{|}~";
+                                    string specialCh = "!#$%&'*+-/=?^_`{|}~.";
                                     for (int i = 1; i < mail.Length - 1; i++)
                                     {
                                         if (!Char.IsLetterOrDigit(mail[i])  && mail[i] != '@'
@@ -103,7 +103,6 @@ namespace WindowsFormsApp1
 
                                     if (invalid)
                                         problem = true;
-
                                     
                                 }
 
@@ -190,5 +189,7 @@ namespace WindowsFormsApp1
             Program.GetLogInForm().Show();
             Program.GetSignUpForm().Hide();
         }
+
+
     }
 }

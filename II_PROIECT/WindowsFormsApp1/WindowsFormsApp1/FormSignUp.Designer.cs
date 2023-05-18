@@ -115,7 +115,7 @@
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label1.Location = new System.Drawing.Point(123, 269);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 81);
+            this.label1.Size = new System.Drawing.Size(213, 78);
             this.label1.TabIndex = 13;
             this.label1.Text = "                  Take your\r\n   interest in sports to\r\n            the next level" +
     "";

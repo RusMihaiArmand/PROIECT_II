@@ -338,6 +338,6 @@ namespace WindowsFormsApp1
                 dateTimePicker1.Hide();
         }
 
-       
+
     }
 }
