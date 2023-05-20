@@ -268,6 +268,9 @@ namespace WindowsFormsApp1
             textBoxPriceMin.Text = "";
             textBoxPriceMax.Text = "";
 
+            textBoxPlaces.Text = "";
+            checkBoxDate.Checked = true;
+            dateTimePicker1.Hide();
         }
 
         public void Updater()
